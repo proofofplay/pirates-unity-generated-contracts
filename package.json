@@ -12,7 +12,7 @@
       "generate-bindings": "node scripts/bindings.js"
     },
     "dependencies": {
-      "fs-extra": "^10.1.0",
-      "nethereum-codegen": "^1.0.24"
+      "fs-extra": "10.1.0",
+      "nethereum-codegen": "1.0.24"
     }
 }
