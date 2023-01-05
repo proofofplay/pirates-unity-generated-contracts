@@ -8,5 +8,11 @@
     "description": "Provides Nethereum/C# bindings for Pirate Nation contracts",
     "keywords": [ "Nethereum", "Generated", "Contracts" ],
     "category": "Backend",
-    "dependencies": {}
+    "scripts": {
+      "generate-bindings": "node bindings.js"
+    },
+    "dependencies": {
+      "fs-extra": "10.1.0",
+      "nethereum-codegen": "1.0.24"
+    }
 }

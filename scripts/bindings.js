@@ -2,10 +2,10 @@ const fs = require("fs");
 const codegen = require("nethereum-codegen");
 
 const allowedNetwork = 'maticmum'
-const basePath = `./Runtime/Contracts`;
-const hardhat_contracts = "../pirates-web-ts/packages/vite-app-ts/src/generated/contracts/hardhat_contracts.json";
-const contractPath = `../pirates-web-ts/packages/hardhat-ts/generated/deployments/${allowedNetwork}`;
-const addressesPath = './Runtime/addresses.json';
+const basePath = `./../Runtime/Contracts`;
+const hardhat_contracts = "../../pirates-web-ts/packages/vite-app-ts/src/generated/contracts/hardhat_contracts.json";
+const contractPath = `../../pirates-web-ts/packages/hardhat-ts/generated/deployments/${allowedNetwork}`;
+const addressesPath = './../Runtime/addresses.json';
 
 const generateBinding = (contractName, contractJson) => {
   const baseNamespace = "PirateNationContracts";
