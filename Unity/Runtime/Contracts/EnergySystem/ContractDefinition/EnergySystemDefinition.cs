@@ -97,6 +97,17 @@ namespace PirateNationContracts.EnergySystem.ContractDefinition
         public virtual string TokenContract { get; set; }
     }
 
+    public partial class GetEarnableDataFunction : GetEarnableDataFunctionBase { }
+
+    [Function("getEarnableData", typeof(GetEarnableDataOutputDTO))]
+    public class GetEarnableDataFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+    }
+
     public partial class GetEnergyFunction : GetEnergyFunctionBase { }
 
     [Function("getEnergy", "uint256")]
@@ -425,6 +436,23 @@ namespace PirateNationContracts.EnergySystem.ContractDefinition
         public virtual bool ReturnValue1 { get; set; }
     }
 
+    public partial class GetEarnableDataOutputDTO : GetEarnableDataOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GetEarnableDataOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("uint256", "currentEnergyEarnable", 1)]
+        public virtual BigInteger CurrentEnergyEarnable { get; set; }
+        [Parameter("uint256", "lastEnergyEarnable", 2)]
+        public virtual BigInteger LastEnergyEarnable { get; set; }
+        [Parameter("uint256", "lastEarnTimestamp", 3)]
+        public virtual BigInteger LastEarnTimestamp { get; set; }
+        [Parameter("uint256", "earnableRegenPerSecond", 4)]
+        public virtual BigInteger EarnableRegenPerSecond { get; set; }
+        [Parameter("uint256", "maxEnergyEarnable", 5)]
+        public virtual BigInteger MaxEnergyEarnable { get; set; }
+    }
+
     public partial class GetEnergyOutputDTO : GetEnergyOutputDTOBase { }
 
     [FunctionOutput]
@@ -476,16 +504,6 @@ namespace PirateNationContracts.EnergySystem.ContractDefinition
         public virtual BigInteger LastSpendTimestamp { get; set; }
         [Parameter("uint256", "lastEnergyAmount", 5)]
         public virtual BigInteger LastEnergyAmount { get; set; }
-        [Parameter("uint256", "currentEnergyEarnable", 6)]
-        public virtual BigInteger CurrentEnergyEarnable { get; set; }
-        [Parameter("uint256", "lastEnergyEarnable", 7)]
-        public virtual BigInteger LastEnergyEarnable { get; set; }
-        [Parameter("uint256", "lastEarnTimestamp", 8)]
-        public virtual BigInteger LastEarnTimestamp { get; set; }
-        [Parameter("uint256", "earnableRegenPerSecond", 9)]
-        public virtual BigInteger EarnableRegenPerSecond { get; set; }
-        [Parameter("uint256", "maxEnergyEarnable", 10)]
-        public virtual BigInteger MaxEnergyEarnable { get; set; }
     }
 
 

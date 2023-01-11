@@ -204,6 +204,20 @@ namespace PirateNationContracts.EnergySystem
             return ContractHandler.QueryAsync<GetContractActiveFunction, bool>(getContractActiveFunction, blockParameter);
         }
 
+        public Task<GetEarnableDataOutputDTO> GetEarnableDataQueryAsync(GetEarnableDataFunction getEarnableDataFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<GetEarnableDataFunction, GetEarnableDataOutputDTO>(getEarnableDataFunction, blockParameter);
+        }
+
+        public Task<GetEarnableDataOutputDTO> GetEarnableDataQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
+        {
+            var getEarnableDataFunction = new GetEarnableDataFunction();
+                getEarnableDataFunction.TokenContract = tokenContract;
+                getEarnableDataFunction.TokenId = tokenId;
+            
+            return ContractHandler.QueryDeserializingToObjectAsync<GetEarnableDataFunction, GetEarnableDataOutputDTO>(getEarnableDataFunction, blockParameter);
+        }
+
         public Task<BigInteger> GetEnergyQueryAsync(GetEnergyFunction getEnergyFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetEnergyFunction, BigInteger>(getEnergyFunction, blockParameter);
