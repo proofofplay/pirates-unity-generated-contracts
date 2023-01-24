@@ -53,6 +53,39 @@ namespace PirateNationContracts.PirateNFT
             return ContractHandler.QueryAsync<BatchLimitFunction, BigInteger>(null, blockParameter);
         }
 
+        public Task<byte[]> GamenftInterfaceidQueryAsync(GamenftInterfaceidFunction gamenftInterfaceidFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GamenftInterfaceidFunction, byte[]>(gamenftInterfaceidFunction, blockParameter);
+        }
+
+        
+        public Task<byte[]> GamenftInterfaceidQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GamenftInterfaceidFunction, byte[]>(null, blockParameter);
+        }
+
+        public Task<byte[]> Ierc721bridgablechildInterfaceidQueryAsync(Ierc721bridgablechildInterfaceidFunction ierc721bridgablechildInterfaceidFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<Ierc721bridgablechildInterfaceidFunction, byte[]>(ierc721bridgablechildInterfaceidFunction, blockParameter);
+        }
+
+        
+        public Task<byte[]> Ierc721bridgablechildInterfaceidQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<Ierc721bridgablechildInterfaceidFunction, byte[]>(null, blockParameter);
+        }
+
+        public Task<byte[]> ItraitsconsumerInterfaceidQueryAsync(ItraitsconsumerInterfaceidFunction itraitsconsumerInterfaceidFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<ItraitsconsumerInterfaceidFunction, byte[]>(itraitsconsumerInterfaceidFunction, blockParameter);
+        }
+
+        
+        public Task<byte[]> ItraitsconsumerInterfaceidQueryAsync(BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<ItraitsconsumerInterfaceidFunction, byte[]>(null, blockParameter);
+        }
+
         public Task<string> BaseExternalURIQueryAsync(BaseExternalURIFunction baseExternalURIFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<BaseExternalURIFunction, string>(baseExternalURIFunction, blockParameter);
@@ -161,6 +194,32 @@ namespace PirateNationContracts.PirateNFT
             return ContractHandler.QueryAsync<BeforeTokenTransferHandlerFunction, string>(null, blockParameter);
         }
 
+        public Task<string> BurnForTestsRequestAsync(BurnForTestsFunction burnForTestsFunction)
+        {
+             return ContractHandler.SendRequestAsync(burnForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> BurnForTestsRequestAndWaitForReceiptAsync(BurnForTestsFunction burnForTestsFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(burnForTestsFunction, cancellationToken);
+        }
+
+        public Task<string> BurnForTestsRequestAsync(BigInteger tokenId)
+        {
+            var burnForTestsFunction = new BurnForTestsFunction();
+                burnForTestsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAsync(burnForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> BurnForTestsRequestAndWaitForReceiptAsync(BigInteger tokenId, CancellationTokenSource cancellationToken = null)
+        {
+            var burnForTestsFunction = new BurnForTestsFunction();
+                burnForTestsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(burnForTestsFunction, cancellationToken);
+        }
+
         public Task<string> ContractURIQueryAsync(ContractURIFunction contractURIFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<ContractURIFunction, string>(contractURIFunction, blockParameter);
@@ -198,6 +257,34 @@ namespace PirateNationContracts.PirateNFT
                 depositFunction.DepositData = depositData;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(depositFunction, cancellationToken);
+        }
+
+        public Task<string> DepositForTestsRequestAsync(DepositForTestsFunction depositForTestsFunction)
+        {
+             return ContractHandler.SendRequestAsync(depositForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> DepositForTestsRequestAndWaitForReceiptAsync(DepositForTestsFunction depositForTestsFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(depositForTestsFunction, cancellationToken);
+        }
+
+        public Task<string> DepositForTestsRequestAsync(string to, byte[] depositData)
+        {
+            var depositForTestsFunction = new DepositForTestsFunction();
+                depositForTestsFunction.To = to;
+                depositForTestsFunction.DepositData = depositData;
+            
+             return ContractHandler.SendRequestAsync(depositForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> DepositForTestsRequestAndWaitForReceiptAsync(string to, byte[] depositData, CancellationTokenSource cancellationToken = null)
+        {
+            var depositForTestsFunction = new DepositForTestsFunction();
+                depositForTestsFunction.To = to;
+                depositForTestsFunction.DepositData = depositData;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(depositForTestsFunction, cancellationToken);
         }
 
         public Task<byte[]> EncodeTokenMetadataQueryAsync(EncodeTokenMetadataFunction encodeTokenMetadataFunction, BlockParameter blockParameter = null)
@@ -387,6 +474,62 @@ namespace PirateNationContracts.PirateNFT
         public Task<BigInteger> MaxSupplyQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<MaxSupplyFunction, BigInteger>(null, blockParameter);
+        }
+
+        public Task<string> MintForTestsRequestAsync(MintForTestsFunction mintForTestsFunction)
+        {
+             return ContractHandler.SendRequestAsync(mintForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> MintForTestsRequestAndWaitForReceiptAsync(MintForTestsFunction mintForTestsFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(mintForTestsFunction, cancellationToken);
+        }
+
+        public Task<string> MintForTestsRequestAsync(string to, BigInteger tokenId)
+        {
+            var mintForTestsFunction = new MintForTestsFunction();
+                mintForTestsFunction.To = to;
+                mintForTestsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAsync(mintForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> MintForTestsRequestAndWaitForReceiptAsync(string to, BigInteger tokenId, CancellationTokenSource cancellationToken = null)
+        {
+            var mintForTestsFunction = new MintForTestsFunction();
+                mintForTestsFunction.To = to;
+                mintForTestsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(mintForTestsFunction, cancellationToken);
+        }
+
+        public Task<string> MintWithoutTraitsRequestAsync(MintWithoutTraitsFunction mintWithoutTraitsFunction)
+        {
+             return ContractHandler.SendRequestAsync(mintWithoutTraitsFunction);
+        }
+
+        public Task<TransactionReceipt> MintWithoutTraitsRequestAndWaitForReceiptAsync(MintWithoutTraitsFunction mintWithoutTraitsFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(mintWithoutTraitsFunction, cancellationToken);
+        }
+
+        public Task<string> MintWithoutTraitsRequestAsync(string to, BigInteger tokenId)
+        {
+            var mintWithoutTraitsFunction = new MintWithoutTraitsFunction();
+                mintWithoutTraitsFunction.To = to;
+                mintWithoutTraitsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAsync(mintWithoutTraitsFunction);
+        }
+
+        public Task<TransactionReceipt> MintWithoutTraitsRequestAndWaitForReceiptAsync(string to, BigInteger tokenId, CancellationTokenSource cancellationToken = null)
+        {
+            var mintWithoutTraitsFunction = new MintWithoutTraitsFunction();
+                mintWithoutTraitsFunction.To = to;
+                mintWithoutTraitsFunction.TokenId = tokenId;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(mintWithoutTraitsFunction, cancellationToken);
         }
 
         public Task<string> NameQueryAsync(NameFunction nameFunction, BlockParameter blockParameter = null)
