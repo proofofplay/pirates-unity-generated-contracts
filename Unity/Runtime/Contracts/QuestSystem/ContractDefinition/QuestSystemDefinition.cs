@@ -140,6 +140,17 @@ namespace PirateNationContracts.QuestSystem.ContractDefinition
 
     }
 
+    public partial class GetPendingQuestsFunction : GetPendingQuestsFunctionBase { }
+
+    [Function("getPendingQuests", "uint256")]
+    public class GetPendingQuestsFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "account", 1)]
+        public virtual string Account { get; set; }
+        [Parameter("uint32", "questId", 2)]
+        public virtual uint QuestId { get; set; }
+    }
+
     public partial class GetQuestDataForAccountFunction : GetQuestDataForAccountFunctionBase { }
 
     [Function("getQuestDataForAccount", typeof(GetQuestDataForAccountOutputDTO))]
@@ -483,6 +494,15 @@ namespace PirateNationContracts.QuestSystem.ContractDefinition
 
     [FunctionOutput]
     public class GetIdOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("uint256", "", 1)]
+        public virtual BigInteger ReturnValue1 { get; set; }
+    }
+
+    public partial class GetPendingQuestsOutputDTO : GetPendingQuestsOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GetPendingQuestsOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
