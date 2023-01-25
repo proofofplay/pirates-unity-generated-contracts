@@ -53,32 +53,6 @@ namespace PirateNationContracts.ShipSystem_Implementation
             return ContractHandler.QueryAsync<CurrentShipIdFunction, BigInteger>(null, blockParameter);
         }
 
-        public Task<string> EquipRequestAsync(EquipFunction equipFunction)
-        {
-             return ContractHandler.SendRequestAsync(equipFunction);
-        }
-
-        public Task<TransactionReceipt> EquipRequestAndWaitForReceiptAsync(EquipFunction equipFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(equipFunction, cancellationToken);
-        }
-
-        public Task<string> EquipRequestAsync(SlotInputParams @params)
-        {
-            var equipFunction = new EquipFunction();
-                equipFunction.Params = @params;
-            
-             return ContractHandler.SendRequestAsync(equipFunction);
-        }
-
-        public Task<TransactionReceipt> EquipRequestAndWaitForReceiptAsync(SlotInputParams @params, CancellationTokenSource cancellationToken = null)
-        {
-            var equipFunction = new EquipFunction();
-                equipFunction.Params = @params;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(equipFunction, cancellationToken);
-        }
-
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
         {
              return ContractHandler.SendRequestAsync(fulfillRandomWordsCallbackFunction);
@@ -127,20 +101,6 @@ namespace PirateNationContracts.ShipSystem_Implementation
         public Task<BigInteger> GetIdQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
-        }
-
-        public Task<GetSlotsOutputDTO> GetSlotsQueryAsync(GetSlotsFunction getSlotsFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetSlotsFunction, GetSlotsOutputDTO>(getSlotsFunction, blockParameter);
-        }
-
-        public Task<GetSlotsOutputDTO> GetSlotsQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
-        {
-            var getSlotsFunction = new GetSlotsFunction();
-                getSlotsFunction.TokenContract = tokenContract;
-                getSlotsFunction.TokenId = tokenId;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<GetSlotsFunction, GetSlotsOutputDTO>(getSlotsFunction, blockParameter);
         }
 
         public Task<GetTokenTotalsDataOutputDTO> GetTokenTotalsDataQueryAsync(GetTokenTotalsDataFunction getTokenTotalsDataFunction, BlockParameter blockParameter = null)

@@ -85,15 +85,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
 
     }
 
-    public partial class EquipFunction : EquipFunctionBase { }
-
-    [Function("equip")]
-    public class EquipFunctionBase : FunctionMessage
-    {
-        [Parameter("tuple", "params", 1)]
-        public virtual SlotInputParams Params { get; set; }
-    }
-
     public partial class FulfillRandomWordsCallbackFunction : FulfillRandomWordsCallbackFunctionBase { }
 
     [Function("fulfillRandomWordsCallback")]
@@ -119,17 +110,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
     public class GetIdFunctionBase : FunctionMessage
     {
 
-    }
-
-    public partial class GetSlotsFunction : GetSlotsFunctionBase { }
-
-    [Function("getSlots", typeof(GetSlotsOutputDTO))]
-    public class GetSlotsFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
     }
 
     public partial class GetTokenTotalsDataFunction : GetTokenTotalsDataFunctionBase { }
@@ -354,8 +334,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
 
 
 
-
-
     public partial class GetGameRegistryOutputDTO : GetGameRegistryOutputDTOBase { }
 
     [FunctionOutput]
@@ -372,15 +350,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
     {
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
-    }
-
-    public partial class GetSlotsOutputDTO : GetSlotsOutputDTOBase { }
-
-    [FunctionOutput]
-    public class GetSlotsOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("tuple[]", "", 1)]
-        public virtual List<ShipSlot> ReturnValue1 { get; set; }
     }
 
     public partial class GetTokenTotalsDataOutputDTO : GetTokenTotalsDataOutputDTOBase { }

@@ -204,6 +204,37 @@ namespace PirateNationContracts.TokenTemplateSystem
              return ContractHandler.SendRequestAndWaitForReceiptAsync(fulfillRandomWordsCallbackFunction, cancellationToken);
         }
 
+        public Task<string> GenerateTokenURIQueryAsync(GenerateTokenURIFunction generateTokenURIFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GenerateTokenURIFunction, string>(generateTokenURIFunction, blockParameter);
+        }
+
+        
+        public Task<string> GenerateTokenURIQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
+        {
+            var generateTokenURIFunction = new GenerateTokenURIFunction();
+                generateTokenURIFunction.TokenContract = tokenContract;
+                generateTokenURIFunction.TokenId = tokenId;
+            
+            return ContractHandler.QueryAsync<GenerateTokenURIFunction, string>(generateTokenURIFunction, blockParameter);
+        }
+
+        public Task<string> GenerateTokenURIQueryAsync(GenerateTokenURI1Function generateTokenURI1Function, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
+        }
+
+        
+        public Task<string> GenerateTokenURIQueryAsync(string tokenContract, BigInteger tokenId, List<TokenURITrait> extraTraits, BlockParameter blockParameter = null)
+        {
+            var generateTokenURI1Function = new GenerateTokenURI1Function();
+                generateTokenURI1Function.TokenContract = tokenContract;
+                generateTokenURI1Function.TokenId = tokenId;
+                generateTokenURI1Function.ExtraTraits = extraTraits;
+            
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
+        }
+
         public Task<string> GetGameRegistryQueryAsync(GetGameRegistryFunction getGameRegistryFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetGameRegistryFunction, string>(getGameRegistryFunction, blockParameter);
@@ -224,6 +255,35 @@ namespace PirateNationContracts.TokenTemplateSystem
         public Task<BigInteger> GetIdQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
+        }
+
+        public Task<GetTemplateOutputDTO> GetTemplateQueryAsync(GetTemplateFunction getTemplateFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<GetTemplateFunction, GetTemplateOutputDTO>(getTemplateFunction, blockParameter);
+        }
+
+        public Task<GetTemplateOutputDTO> GetTemplateQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
+        {
+            var getTemplateFunction = new GetTemplateFunction();
+                getTemplateFunction.TokenContract = tokenContract;
+                getTemplateFunction.TokenId = tokenId;
+            
+            return ContractHandler.QueryDeserializingToObjectAsync<GetTemplateFunction, GetTemplateOutputDTO>(getTemplateFunction, blockParameter);
+        }
+
+        public Task<List<BigInteger>> GetTraitIdsQueryAsync(GetTraitIdsFunction getTraitIdsFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
+        }
+
+        
+        public Task<List<BigInteger>> GetTraitIdsQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
+        {
+            var getTraitIdsFunction = new GetTraitIdsFunction();
+                getTraitIdsFunction.TokenContract = tokenContract;
+                getTraitIdsFunction.TokenId = tokenId;
+            
+            return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
         }
 
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
@@ -358,6 +418,36 @@ namespace PirateNationContracts.TokenTemplateSystem
                 setPausedFunction.ShouldPause = shouldPause;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setPausedFunction, cancellationToken);
+        }
+
+        public Task<string> SetTemplateRequestAsync(SetTemplateFunction setTemplateFunction)
+        {
+             return ContractHandler.SendRequestAsync(setTemplateFunction);
+        }
+
+        public Task<TransactionReceipt> SetTemplateRequestAndWaitForReceiptAsync(SetTemplateFunction setTemplateFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTemplateFunction, cancellationToken);
+        }
+
+        public Task<string> SetTemplateRequestAsync(string tokenContract, BigInteger tokenId, BigInteger templateId)
+        {
+            var setTemplateFunction = new SetTemplateFunction();
+                setTemplateFunction.TokenContract = tokenContract;
+                setTemplateFunction.TokenId = tokenId;
+                setTemplateFunction.TemplateId = templateId;
+            
+             return ContractHandler.SendRequestAsync(setTemplateFunction);
+        }
+
+        public Task<TransactionReceipt> SetTemplateRequestAndWaitForReceiptAsync(string tokenContract, BigInteger tokenId, BigInteger templateId, CancellationTokenSource cancellationToken = null)
+        {
+            var setTemplateFunction = new SetTemplateFunction();
+                setTemplateFunction.TokenContract = tokenContract;
+                setTemplateFunction.TokenId = tokenId;
+                setTemplateFunction.TemplateId = templateId;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTemplateFunction, cancellationToken);
         }
 
         public Task<string> TransferOwnershipRequestAsync(TransferOwnershipFunction transferOwnershipFunction)

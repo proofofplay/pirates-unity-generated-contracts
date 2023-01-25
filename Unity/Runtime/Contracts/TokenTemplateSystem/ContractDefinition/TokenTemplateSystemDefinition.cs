@@ -97,6 +97,30 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         public virtual List<BigInteger> RandomWords { get; set; }
     }
 
+    public partial class GenerateTokenURIFunction : GenerateTokenURIFunctionBase { }
+
+    [Function("generateTokenURI", "string")]
+    public class GenerateTokenURIFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+    }
+
+    public partial class GenerateTokenURI1Function : GenerateTokenURI1FunctionBase { }
+
+    [Function("generateTokenURI", "string")]
+    public class GenerateTokenURI1FunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+        [Parameter("tuple[]", "extraTraits", 3)]
+        public virtual List<TokenURITrait> ExtraTraits { get; set; }
+    }
+
     public partial class GetGameRegistryFunction : GetGameRegistryFunctionBase { }
 
     [Function("getGameRegistry", "address")]
@@ -111,6 +135,28 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
     public class GetIdFunctionBase : FunctionMessage
     {
 
+    }
+
+    public partial class GetTemplateFunction : GetTemplateFunctionBase { }
+
+    [Function("getTemplate", typeof(GetTemplateOutputDTO))]
+    public class GetTemplateFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+    }
+
+    public partial class GetTraitIdsFunction : GetTraitIdsFunctionBase { }
+
+    [Function("getTraitIds", "uint256[]")]
+    public class GetTraitIdsFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
     }
 
     public partial class InitializeFunction : InitializeFunctionBase { }
@@ -171,6 +217,19 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
     {
         [Parameter("bool", "shouldPause", 1)]
         public virtual bool ShouldPause { get; set; }
+    }
+
+    public partial class SetTemplateFunction : SetTemplateFunctionBase { }
+
+    [Function("setTemplate")]
+    public class SetTemplateFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+        [Parameter("uint256", "templateId", 3)]
+        public virtual BigInteger TemplateId { get; set; }
     }
 
     public partial class TransferOwnershipFunction : TransferOwnershipFunctionBase { }
@@ -251,6 +310,15 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
 
 
 
+    public partial class InvalidTraitDataTypeError : InvalidTraitDataTypeErrorBase { }
+
+    [Error("InvalidTraitDataType")]
+    public class InvalidTraitDataTypeErrorBase : IErrorDTO
+    {
+        [Parameter("uint8", "dataType", 1)]
+        public virtual byte DataType { get; set; }
+    }
+
     public partial class MissingRoleError : MissingRoleErrorBase { }
 
     [Error("MissingRole")]
@@ -260,6 +328,19 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         public virtual string Account { get; set; }
         [Parameter("bytes32", "expectedRole", 2)]
         public virtual byte[] ExpectedRole { get; set; }
+    }
+
+    public partial class MissingTraitError : MissingTraitErrorBase { }
+
+    [Error("MissingTrait")]
+    public class MissingTraitErrorBase : IErrorDTO
+    {
+        [Parameter("address", "tokenContract", 1)]
+        public virtual string TokenContract { get; set; }
+        [Parameter("uint256", "tokenId", 2)]
+        public virtual BigInteger TokenId { get; set; }
+        [Parameter("uint256", "traitId", 3)]
+        public virtual BigInteger TraitId { get; set; }
     }
 
 
@@ -283,6 +364,24 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
 
 
 
+    public partial class GenerateTokenURIOutputDTO : GenerateTokenURIOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GenerateTokenURIOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("string", "", 1)]
+        public virtual string ReturnValue1 { get; set; }
+    }
+
+    public partial class GenerateTokenURI1OutputDTO : GenerateTokenURI1OutputDTOBase { }
+
+    [FunctionOutput]
+    public class GenerateTokenURI1OutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("string", "", 1)]
+        public virtual string ReturnValue1 { get; set; }
+    }
+
     public partial class GetGameRegistryOutputDTO : GetGameRegistryOutputDTOBase { }
 
     [FunctionOutput]
@@ -299,6 +398,26 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
     {
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
+    }
+
+    public partial class GetTemplateOutputDTO : GetTemplateOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GetTemplateOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("address", "", 1)]
+        public virtual string ReturnValue1 { get; set; }
+        [Parameter("uint256", "", 2)]
+        public virtual BigInteger ReturnValue2 { get; set; }
+    }
+
+    public partial class GetTraitIdsOutputDTO : GetTraitIdsOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GetTraitIdsOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("uint256[]", "", 1)]
+        public virtual List<BigInteger> ReturnValue1 { get; set; }
     }
 
 
@@ -329,6 +448,8 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         [Parameter("bool", "", 1)]
         public virtual bool ReturnValue1 { get; set; }
     }
+
+
 
 
 
