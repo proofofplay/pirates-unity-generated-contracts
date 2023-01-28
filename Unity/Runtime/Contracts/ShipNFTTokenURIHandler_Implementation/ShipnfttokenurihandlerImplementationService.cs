@@ -42,34 +42,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler_Implementation
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<string> AddAssetRequestAsync(AddAssetFunction addAssetFunction)
-        {
-             return ContractHandler.SendRequestAsync(addAssetFunction);
-        }
-
-        public Task<TransactionReceipt> AddAssetRequestAndWaitForReceiptAsync(AddAssetFunction addAssetFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(addAssetFunction, cancellationToken);
-        }
-
-        public Task<string> AddAssetRequestAsync(string tokenContract, Asset asset)
-        {
-            var addAssetFunction = new AddAssetFunction();
-                addAssetFunction.TokenContract = tokenContract;
-                addAssetFunction.Asset = asset;
-            
-             return ContractHandler.SendRequestAsync(addAssetFunction);
-        }
-
-        public Task<TransactionReceipt> AddAssetRequestAndWaitForReceiptAsync(string tokenContract, Asset asset, CancellationTokenSource cancellationToken = null)
-        {
-            var addAssetFunction = new AddAssetFunction();
-                addAssetFunction.TokenContract = tokenContract;
-                addAssetFunction.Asset = asset;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(addAssetFunction, cancellationToken);
-        }
-
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
         {
              return ContractHandler.SendRequestAsync(fulfillRandomWordsCallbackFunction);
@@ -222,34 +194,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler_Implementation
         public Task<bool> PausedQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<PausedFunction, bool>(null, blockParameter);
-        }
-
-        public Task<string> RemoveAssetRequestAsync(RemoveAssetFunction removeAssetFunction)
-        {
-             return ContractHandler.SendRequestAsync(removeAssetFunction);
-        }
-
-        public Task<TransactionReceipt> RemoveAssetRequestAndWaitForReceiptAsync(RemoveAssetFunction removeAssetFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(removeAssetFunction, cancellationToken);
-        }
-
-        public Task<string> RemoveAssetRequestAsync(string tokenContract, BigInteger traitId)
-        {
-            var removeAssetFunction = new RemoveAssetFunction();
-                removeAssetFunction.TokenContract = tokenContract;
-                removeAssetFunction.TraitId = traitId;
-            
-             return ContractHandler.SendRequestAsync(removeAssetFunction);
-        }
-
-        public Task<TransactionReceipt> RemoveAssetRequestAndWaitForReceiptAsync(string tokenContract, BigInteger traitId, CancellationTokenSource cancellationToken = null)
-        {
-            var removeAssetFunction = new RemoveAssetFunction();
-                removeAssetFunction.TokenContract = tokenContract;
-                removeAssetFunction.TraitId = traitId;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(removeAssetFunction, cancellationToken);
         }
 
         public Task<string> RenounceOwnershipRequestAsync(RenounceOwnershipFunction renounceOwnershipFunction)

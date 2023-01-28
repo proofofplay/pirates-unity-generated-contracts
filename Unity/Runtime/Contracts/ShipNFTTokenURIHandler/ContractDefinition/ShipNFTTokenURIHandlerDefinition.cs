@@ -77,17 +77,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler.ContractDefinition
         public virtual byte[] Data { get; set; }
     }
 
-    public partial class AddAssetFunction : AddAssetFunctionBase { }
-
-    [Function("addAsset")]
-    public class AddAssetFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("tuple", "asset", 2)]
-        public virtual Asset Asset { get; set; }
-    }
-
     public partial class FulfillRandomWordsCallbackFunction : FulfillRandomWordsCallbackFunctionBase { }
 
     [Function("fulfillRandomWordsCallback")]
@@ -178,17 +167,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler.ContractDefinition
     public class PausedFunctionBase : FunctionMessage
     {
 
-    }
-
-    public partial class RemoveAssetFunction : RemoveAssetFunctionBase { }
-
-    [Function("removeAsset")]
-    public class RemoveAssetFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "traitId", 2)]
-        public virtual BigInteger TraitId { get; set; }
     }
 
     public partial class RenounceOwnershipFunction : RenounceOwnershipFunctionBase { }
@@ -331,8 +309,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler.ContractDefinition
 
 
 
-
-
     public partial class GetAssetOutputDTO : GetAssetOutputDTOBase { }
 
     [FunctionOutput]
@@ -406,8 +382,6 @@ namespace PirateNationContracts.ShipNFTTokenURIHandler.ContractDefinition
         [Parameter("bool", "", 1)]
         public virtual bool ReturnValue1 { get; set; }
     }
-
-
 
 
 

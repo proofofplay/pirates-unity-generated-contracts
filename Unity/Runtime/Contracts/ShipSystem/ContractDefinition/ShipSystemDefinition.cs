@@ -234,23 +234,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
         public virtual string Implementation { get; set; }
     }
 
-    public partial class EquippedEventDTO : EquippedEventDTOBase { }
-
-    [Event("Equipped")]
-    public class EquippedEventDTOBase : IEventDTO
-    {
-        [Parameter("address", "shipContract", 1, false )]
-        public virtual string ShipContract { get; set; }
-        [Parameter("uint256", "shipId", 2, false )]
-        public virtual BigInteger ShipId { get; set; }
-        [Parameter("address", "tokenContract", 3, false )]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 4, false )]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint8", "slotId", 5, false )]
-        public virtual byte SlotId { get; set; }
-    }
-
     public partial class InitializedEventDTO : InitializedEventDTOBase { }
 
     [Event("Initialized")]
@@ -291,13 +274,15 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
 
 
 
-    public partial class InvalidSlotIdError : InvalidSlotIdErrorBase { }
 
-    [Error("InvalidSlotId")]
-    public class InvalidSlotIdErrorBase : IErrorDTO
+
+    public partial class InvalidShipIdError : InvalidShipIdErrorBase { }
+
+    [Error("InvalidShipId")]
+    public class InvalidShipIdErrorBase : IErrorDTO
     {
-        [Parameter("uint8", "slotId", 1)]
-        public virtual byte SlotId { get; set; }
+        [Parameter("uint256", "shipId", 1)]
+        public virtual BigInteger ShipId { get; set; }
     }
 
     public partial class MissingRoleError : MissingRoleErrorBase { }
@@ -310,8 +295,6 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
         [Parameter("bytes32", "expectedRole", 2)]
         public virtual byte[] ExpectedRole { get; set; }
     }
-
-
 
 
 
