@@ -10,33 +10,33 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using PirateNationContracts.QuestSystem.ContractDefinition;
+using PirateNationContracts.TokenTemplateSystem.ContractDefinition;
 
-namespace PirateNationContracts.QuestSystem
+namespace PirateNationContracts.TokenTemplateSystem
 {
-    public partial class QuestSystemService
+    public partial class TokenTemplateSystemService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, QuestSystemDeployment questSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, TokenTemplateSystemDeployment tokenTemplateSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<QuestSystemDeployment>().SendRequestAndWaitForReceiptAsync(questSystemDeployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<TokenTemplateSystemDeployment>().SendRequestAndWaitForReceiptAsync(tokenTemplateSystemDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, QuestSystemDeployment questSystemDeployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, TokenTemplateSystemDeployment tokenTemplateSystemDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<QuestSystemDeployment>().SendRequestAsync(questSystemDeployment);
+            return web3.Eth.GetContractDeploymentHandler<TokenTemplateSystemDeployment>().SendRequestAsync(tokenTemplateSystemDeployment);
         }
 
-        public static async Task<QuestSystemService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, QuestSystemDeployment questSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<TokenTemplateSystemService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, TokenTemplateSystemDeployment tokenTemplateSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, questSystemDeployment, cancellationTokenSource);
-            return new QuestSystemService(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, tokenTemplateSystemDeployment, cancellationTokenSource);
+            return new TokenTemplateSystemService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public QuestSystemService(Nethereum.Web3.Web3 web3, string contractAddress)
+        public TokenTemplateSystemService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
@@ -162,44 +162,18 @@ namespace PirateNationContracts.QuestSystem
              return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToAndCallFunction, cancellationToken);
         }
 
-        public Task<ActiveQuestsOutputDTO> ActiveQuestsQueryAsync(ActiveQuestsFunction activeQuestsFunction, BlockParameter blockParameter = null)
+        public Task<bool> ExistsQueryAsync(ExistsFunction existsFunction, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryDeserializingToObjectAsync<ActiveQuestsFunction, ActiveQuestsOutputDTO>(activeQuestsFunction, blockParameter);
-        }
-
-        public Task<ActiveQuestsOutputDTO> ActiveQuestsQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
-        {
-            var activeQuestsFunction = new ActiveQuestsFunction();
-                activeQuestsFunction.ReturnValue1 = returnValue1;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<ActiveQuestsFunction, ActiveQuestsOutputDTO>(activeQuestsFunction, blockParameter);
-        }
-
-        public Task<QuestDefinitionsOutputDTO> QuestDefinitionsQueryAsync(QuestDefinitionsFunction questDefinitionsFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<QuestDefinitionsFunction, QuestDefinitionsOutputDTO>(questDefinitionsFunction, blockParameter);
-        }
-
-        public Task<QuestDefinitionsOutputDTO> QuestDefinitionsQueryAsync(uint returnValue1, BlockParameter blockParameter = null)
-        {
-            var questDefinitionsFunction = new QuestDefinitionsFunction();
-                questDefinitionsFunction.ReturnValue1 = returnValue1;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<QuestDefinitionsFunction, QuestDefinitionsOutputDTO>(questDefinitionsFunction, blockParameter);
-        }
-
-        public Task<List<BigInteger>> ActiveQuestIdsForAccountQueryAsync(ActiveQuestIdsForAccountFunction activeQuestIdsForAccountFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<ActiveQuestIdsForAccountFunction, List<BigInteger>>(activeQuestIdsForAccountFunction, blockParameter);
+            return ContractHandler.QueryAsync<ExistsFunction, bool>(existsFunction, blockParameter);
         }
 
         
-        public Task<List<BigInteger>> ActiveQuestIdsForAccountQueryAsync(string account, BlockParameter blockParameter = null)
+        public Task<bool> ExistsQueryAsync(BigInteger templateId, BlockParameter blockParameter = null)
         {
-            var activeQuestIdsForAccountFunction = new ActiveQuestIdsForAccountFunction();
-                activeQuestIdsForAccountFunction.Account = account;
+            var existsFunction = new ExistsFunction();
+                existsFunction.TemplateId = templateId;
             
-            return ContractHandler.QueryAsync<ActiveQuestIdsForAccountFunction, List<BigInteger>>(activeQuestIdsForAccountFunction, blockParameter);
+            return ContractHandler.QueryAsync<ExistsFunction, bool>(existsFunction, blockParameter);
         }
 
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
@@ -230,17 +204,35 @@ namespace PirateNationContracts.QuestSystem
              return ContractHandler.SendRequestAndWaitForReceiptAsync(fulfillRandomWordsCallbackFunction, cancellationToken);
         }
 
-        public Task<GetActiveQuestOutputDTO> GetActiveQuestQueryAsync(GetActiveQuestFunction getActiveQuestFunction, BlockParameter blockParameter = null)
+        public Task<string> GenerateTokenURIQueryAsync(GenerateTokenURIFunction generateTokenURIFunction, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveQuestFunction, GetActiveQuestOutputDTO>(getActiveQuestFunction, blockParameter);
+            return ContractHandler.QueryAsync<GenerateTokenURIFunction, string>(generateTokenURIFunction, blockParameter);
         }
 
-        public Task<GetActiveQuestOutputDTO> GetActiveQuestQueryAsync(BigInteger activeQuestId, BlockParameter blockParameter = null)
+        
+        public Task<string> GenerateTokenURIQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
         {
-            var getActiveQuestFunction = new GetActiveQuestFunction();
-                getActiveQuestFunction.ActiveQuestId = activeQuestId;
+            var generateTokenURIFunction = new GenerateTokenURIFunction();
+                generateTokenURIFunction.TokenContract = tokenContract;
+                generateTokenURIFunction.TokenId = tokenId;
             
-            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveQuestFunction, GetActiveQuestOutputDTO>(getActiveQuestFunction, blockParameter);
+            return ContractHandler.QueryAsync<GenerateTokenURIFunction, string>(generateTokenURIFunction, blockParameter);
+        }
+
+        public Task<string> GenerateTokenURIQueryAsync(GenerateTokenURI1Function generateTokenURI1Function, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
+        }
+
+        
+        public Task<string> GenerateTokenURIQueryAsync(string tokenContract, BigInteger tokenId, List<TokenURITrait> extraTraits, BlockParameter blockParameter = null)
+        {
+            var generateTokenURI1Function = new GenerateTokenURI1Function();
+                generateTokenURI1Function.TokenContract = tokenContract;
+                generateTokenURI1Function.TokenId = tokenId;
+                generateTokenURI1Function.ExtraTraits = extraTraits;
+            
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
         }
 
         public Task<string> GetGameRegistryQueryAsync(GetGameRegistryFunction getGameRegistryFunction, BlockParameter blockParameter = null)
@@ -265,46 +257,33 @@ namespace PirateNationContracts.QuestSystem
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
         }
 
-        public Task<BigInteger> GetPendingQuestsQueryAsync(GetPendingQuestsFunction getPendingQuestsFunction, BlockParameter blockParameter = null)
+        public Task<GetTemplateOutputDTO> GetTemplateQueryAsync(GetTemplateFunction getTemplateFunction, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryAsync<GetPendingQuestsFunction, BigInteger>(getPendingQuestsFunction, blockParameter);
+            return ContractHandler.QueryDeserializingToObjectAsync<GetTemplateFunction, GetTemplateOutputDTO>(getTemplateFunction, blockParameter);
+        }
+
+        public Task<GetTemplateOutputDTO> GetTemplateQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
+        {
+            var getTemplateFunction = new GetTemplateFunction();
+                getTemplateFunction.TokenContract = tokenContract;
+                getTemplateFunction.TokenId = tokenId;
+            
+            return ContractHandler.QueryDeserializingToObjectAsync<GetTemplateFunction, GetTemplateOutputDTO>(getTemplateFunction, blockParameter);
+        }
+
+        public Task<List<BigInteger>> GetTraitIdsQueryAsync(GetTraitIdsFunction getTraitIdsFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
         }
 
         
-        public Task<BigInteger> GetPendingQuestsQueryAsync(string account, uint questId, BlockParameter blockParameter = null)
+        public Task<List<BigInteger>> GetTraitIdsQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
         {
-            var getPendingQuestsFunction = new GetPendingQuestsFunction();
-                getPendingQuestsFunction.Account = account;
-                getPendingQuestsFunction.QuestId = questId;
+            var getTraitIdsFunction = new GetTraitIdsFunction();
+                getTraitIdsFunction.TokenContract = tokenContract;
+                getTraitIdsFunction.TokenId = tokenId;
             
-            return ContractHandler.QueryAsync<GetPendingQuestsFunction, BigInteger>(getPendingQuestsFunction, blockParameter);
-        }
-
-        public Task<GetQuestDataForAccountOutputDTO> GetQuestDataForAccountQueryAsync(GetQuestDataForAccountFunction getQuestDataForAccountFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetQuestDataForAccountFunction, GetQuestDataForAccountOutputDTO>(getQuestDataForAccountFunction, blockParameter);
-        }
-
-        public Task<GetQuestDataForAccountOutputDTO> GetQuestDataForAccountQueryAsync(string account, uint questId, BlockParameter blockParameter = null)
-        {
-            var getQuestDataForAccountFunction = new GetQuestDataForAccountFunction();
-                getQuestDataForAccountFunction.Account = account;
-                getQuestDataForAccountFunction.QuestId = questId;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<GetQuestDataForAccountFunction, GetQuestDataForAccountOutputDTO>(getQuestDataForAccountFunction, blockParameter);
-        }
-
-        public Task<GetQuestDefinitionOutputDTO> GetQuestDefinitionQueryAsync(GetQuestDefinitionFunction getQuestDefinitionFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetQuestDefinitionFunction, GetQuestDefinitionOutputDTO>(getQuestDefinitionFunction, blockParameter);
-        }
-
-        public Task<GetQuestDefinitionOutputDTO> GetQuestDefinitionQueryAsync(uint questId, BlockParameter blockParameter = null)
-        {
-            var getQuestDefinitionFunction = new GetQuestDefinitionFunction();
-                getQuestDefinitionFunction.QuestId = questId;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<GetQuestDefinitionFunction, GetQuestDefinitionOutputDTO>(getQuestDefinitionFunction, blockParameter);
+            return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
         }
 
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
@@ -331,21 +310,6 @@ namespace PirateNationContracts.QuestSystem
                 initializeFunction.GameRegistryAddress = gameRegistryAddress;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(initializeFunction, cancellationToken);
-        }
-
-        public Task<bool> IsQuestAvailableQueryAsync(IsQuestAvailableFunction isQuestAvailableFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<IsQuestAvailableFunction, bool>(isQuestAvailableFunction, blockParameter);
-        }
-
-        
-        public Task<bool> IsQuestAvailableQueryAsync(string account, uint questId, BlockParameter blockParameter = null)
-        {
-            var isQuestAvailableFunction = new IsQuestAvailableFunction();
-                isQuestAvailableFunction.Account = account;
-                isQuestAvailableFunction.QuestId = questId;
-            
-            return ContractHandler.QueryAsync<IsQuestAvailableFunction, bool>(isQuestAvailableFunction, blockParameter);
         }
 
         public Task<bool> IsTrustedForwarderQueryAsync(IsTrustedForwarderFunction isTrustedForwarderFunction, BlockParameter blockParameter = null)
@@ -456,86 +420,34 @@ namespace PirateNationContracts.QuestSystem
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setPausedFunction, cancellationToken);
         }
 
-        public Task<string> SetQuestDefinitionRequestAsync(SetQuestDefinitionFunction setQuestDefinitionFunction)
+        public Task<string> SetTemplateRequestAsync(SetTemplateFunction setTemplateFunction)
         {
-             return ContractHandler.SendRequestAsync(setQuestDefinitionFunction);
+             return ContractHandler.SendRequestAsync(setTemplateFunction);
         }
 
-        public Task<TransactionReceipt> SetQuestDefinitionRequestAndWaitForReceiptAsync(SetQuestDefinitionFunction setQuestDefinitionFunction, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetTemplateRequestAndWaitForReceiptAsync(SetTemplateFunction setTemplateFunction, CancellationTokenSource cancellationToken = null)
         {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setQuestDefinitionFunction, cancellationToken);
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTemplateFunction, cancellationToken);
         }
 
-        public Task<string> SetQuestDefinitionRequestAsync(uint questId, QuestDefinition definition)
+        public Task<string> SetTemplateRequestAsync(string tokenContract, BigInteger tokenId, BigInteger templateId)
         {
-            var setQuestDefinitionFunction = new SetQuestDefinitionFunction();
-                setQuestDefinitionFunction.QuestId = questId;
-                setQuestDefinitionFunction.Definition = definition;
+            var setTemplateFunction = new SetTemplateFunction();
+                setTemplateFunction.TokenContract = tokenContract;
+                setTemplateFunction.TokenId = tokenId;
+                setTemplateFunction.TemplateId = templateId;
             
-             return ContractHandler.SendRequestAsync(setQuestDefinitionFunction);
+             return ContractHandler.SendRequestAsync(setTemplateFunction);
         }
 
-        public Task<TransactionReceipt> SetQuestDefinitionRequestAndWaitForReceiptAsync(uint questId, QuestDefinition definition, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> SetTemplateRequestAndWaitForReceiptAsync(string tokenContract, BigInteger tokenId, BigInteger templateId, CancellationTokenSource cancellationToken = null)
         {
-            var setQuestDefinitionFunction = new SetQuestDefinitionFunction();
-                setQuestDefinitionFunction.QuestId = questId;
-                setQuestDefinitionFunction.Definition = definition;
+            var setTemplateFunction = new SetTemplateFunction();
+                setTemplateFunction.TokenContract = tokenContract;
+                setTemplateFunction.TokenId = tokenId;
+                setTemplateFunction.TemplateId = templateId;
             
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setQuestDefinitionFunction, cancellationToken);
-        }
-
-        public Task<string> SetQuestEnabledRequestAsync(SetQuestEnabledFunction setQuestEnabledFunction)
-        {
-             return ContractHandler.SendRequestAsync(setQuestEnabledFunction);
-        }
-
-        public Task<TransactionReceipt> SetQuestEnabledRequestAndWaitForReceiptAsync(SetQuestEnabledFunction setQuestEnabledFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setQuestEnabledFunction, cancellationToken);
-        }
-
-        public Task<string> SetQuestEnabledRequestAsync(uint questId, bool enabled)
-        {
-            var setQuestEnabledFunction = new SetQuestEnabledFunction();
-                setQuestEnabledFunction.QuestId = questId;
-                setQuestEnabledFunction.Enabled = enabled;
-            
-             return ContractHandler.SendRequestAsync(setQuestEnabledFunction);
-        }
-
-        public Task<TransactionReceipt> SetQuestEnabledRequestAndWaitForReceiptAsync(uint questId, bool enabled, CancellationTokenSource cancellationToken = null)
-        {
-            var setQuestEnabledFunction = new SetQuestEnabledFunction();
-                setQuestEnabledFunction.QuestId = questId;
-                setQuestEnabledFunction.Enabled = enabled;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setQuestEnabledFunction, cancellationToken);
-        }
-
-        public Task<string> StartQuestRequestAsync(StartQuestFunction startQuestFunction)
-        {
-             return ContractHandler.SendRequestAsync(startQuestFunction);
-        }
-
-        public Task<TransactionReceipt> StartQuestRequestAndWaitForReceiptAsync(StartQuestFunction startQuestFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(startQuestFunction, cancellationToken);
-        }
-
-        public Task<string> StartQuestRequestAsync(QuestParams @params)
-        {
-            var startQuestFunction = new StartQuestFunction();
-                startQuestFunction.Params = @params;
-            
-             return ContractHandler.SendRequestAsync(startQuestFunction);
-        }
-
-        public Task<TransactionReceipt> StartQuestRequestAndWaitForReceiptAsync(QuestParams @params, CancellationTokenSource cancellationToken = null)
-        {
-            var startQuestFunction = new StartQuestFunction();
-                startQuestFunction.Params = @params;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(startQuestFunction, cancellationToken);
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTemplateFunction, cancellationToken);
         }
 
         public Task<string> TransferOwnershipRequestAsync(TransferOwnershipFunction transferOwnershipFunction)

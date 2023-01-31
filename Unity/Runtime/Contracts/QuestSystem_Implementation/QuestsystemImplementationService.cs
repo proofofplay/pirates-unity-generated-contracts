@@ -145,6 +145,21 @@ namespace PirateNationContracts.QuestSystem_Implementation
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
         }
 
+        public Task<BigInteger> GetPendingQuestsQueryAsync(GetPendingQuestsFunction getPendingQuestsFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetPendingQuestsFunction, BigInteger>(getPendingQuestsFunction, blockParameter);
+        }
+
+        
+        public Task<BigInteger> GetPendingQuestsQueryAsync(string account, uint questId, BlockParameter blockParameter = null)
+        {
+            var getPendingQuestsFunction = new GetPendingQuestsFunction();
+                getPendingQuestsFunction.Account = account;
+                getPendingQuestsFunction.QuestId = questId;
+            
+            return ContractHandler.QueryAsync<GetPendingQuestsFunction, BigInteger>(getPendingQuestsFunction, blockParameter);
+        }
+
         public Task<GetQuestDataForAccountOutputDTO> GetQuestDataForAccountQueryAsync(GetQuestDataForAccountFunction getQuestDataForAccountFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryDeserializingToObjectAsync<GetQuestDataForAccountFunction, GetQuestDataForAccountOutputDTO>(getQuestDataForAccountFunction, blockParameter);
