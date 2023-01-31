@@ -10,167 +10,36 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using PirateNationContracts.ShipSystem.ContractDefinition;
+using PirateNationContracts.ShipNFTBeforeTokenTransferHandler_Implementation.ContractDefinition;
 
-namespace PirateNationContracts.ShipSystem
+namespace PirateNationContracts.ShipNFTBeforeTokenTransferHandler_Implementation
 {
-    public partial class ShipSystemService
+    public partial class ShipnftbeforetokentransferhandlerImplementationService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipnftbeforetokentransferhandlerImplementationDeployment shipnftbeforetokentransferhandlerImplementationDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAndWaitForReceiptAsync(shipSystemDeployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<ShipnftbeforetokentransferhandlerImplementationDeployment>().SendRequestAndWaitForReceiptAsync(shipnftbeforetokentransferhandlerImplementationDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipnftbeforetokentransferhandlerImplementationDeployment shipnftbeforetokentransferhandlerImplementationDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAsync(shipSystemDeployment);
+            return web3.Eth.GetContractDeploymentHandler<ShipnftbeforetokentransferhandlerImplementationDeployment>().SendRequestAsync(shipnftbeforetokentransferhandlerImplementationDeployment);
         }
 
-        public static async Task<ShipSystemService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<ShipnftbeforetokentransferhandlerImplementationService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipnftbeforetokentransferhandlerImplementationDeployment shipnftbeforetokentransferhandlerImplementationDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipSystemDeployment, cancellationTokenSource);
-            return new ShipSystemService(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipnftbeforetokentransferhandlerImplementationDeployment, cancellationTokenSource);
+            return new ShipnftbeforetokentransferhandlerImplementationService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public ShipSystemService(Nethereum.Web3.Web3 web3, string contractAddress)
+        public ShipnftbeforetokentransferhandlerImplementationService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
-        }
-
-        public Task<string> AdminRequestAsync(AdminFunction adminFunction)
-        {
-             return ContractHandler.SendRequestAsync(adminFunction);
-        }
-
-        public Task<string> AdminRequestAsync()
-        {
-             return ContractHandler.SendRequestAsync<AdminFunction>();
-        }
-
-        public Task<TransactionReceipt> AdminRequestAndWaitForReceiptAsync(AdminFunction adminFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(adminFunction, cancellationToken);
-        }
-
-        public Task<TransactionReceipt> AdminRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync<AdminFunction>(null, cancellationToken);
-        }
-
-        public Task<string> ChangeAdminRequestAsync(ChangeAdminFunction changeAdminFunction)
-        {
-             return ContractHandler.SendRequestAsync(changeAdminFunction);
-        }
-
-        public Task<TransactionReceipt> ChangeAdminRequestAndWaitForReceiptAsync(ChangeAdminFunction changeAdminFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(changeAdminFunction, cancellationToken);
-        }
-
-        public Task<string> ChangeAdminRequestAsync(string newAdmin)
-        {
-            var changeAdminFunction = new ChangeAdminFunction();
-                changeAdminFunction.NewAdmin = newAdmin;
-            
-             return ContractHandler.SendRequestAsync(changeAdminFunction);
-        }
-
-        public Task<TransactionReceipt> ChangeAdminRequestAndWaitForReceiptAsync(string newAdmin, CancellationTokenSource cancellationToken = null)
-        {
-            var changeAdminFunction = new ChangeAdminFunction();
-                changeAdminFunction.NewAdmin = newAdmin;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(changeAdminFunction, cancellationToken);
-        }
-
-        public Task<string> ImplementationRequestAsync(ImplementationFunction implementationFunction)
-        {
-             return ContractHandler.SendRequestAsync(implementationFunction);
-        }
-
-        public Task<string> ImplementationRequestAsync()
-        {
-             return ContractHandler.SendRequestAsync<ImplementationFunction>();
-        }
-
-        public Task<TransactionReceipt> ImplementationRequestAndWaitForReceiptAsync(ImplementationFunction implementationFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(implementationFunction, cancellationToken);
-        }
-
-        public Task<TransactionReceipt> ImplementationRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync<ImplementationFunction>(null, cancellationToken);
-        }
-
-        public Task<string> UpgradeToRequestAsync(UpgradeToFunction upgradeToFunction)
-        {
-             return ContractHandler.SendRequestAsync(upgradeToFunction);
-        }
-
-        public Task<TransactionReceipt> UpgradeToRequestAndWaitForReceiptAsync(UpgradeToFunction upgradeToFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToFunction, cancellationToken);
-        }
-
-        public Task<string> UpgradeToRequestAsync(string newImplementation)
-        {
-            var upgradeToFunction = new UpgradeToFunction();
-                upgradeToFunction.NewImplementation = newImplementation;
-            
-             return ContractHandler.SendRequestAsync(upgradeToFunction);
-        }
-
-        public Task<TransactionReceipt> UpgradeToRequestAndWaitForReceiptAsync(string newImplementation, CancellationTokenSource cancellationToken = null)
-        {
-            var upgradeToFunction = new UpgradeToFunction();
-                upgradeToFunction.NewImplementation = newImplementation;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToFunction, cancellationToken);
-        }
-
-        public Task<string> UpgradeToAndCallRequestAsync(UpgradeToAndCallFunction upgradeToAndCallFunction)
-        {
-             return ContractHandler.SendRequestAsync(upgradeToAndCallFunction);
-        }
-
-        public Task<TransactionReceipt> UpgradeToAndCallRequestAndWaitForReceiptAsync(UpgradeToAndCallFunction upgradeToAndCallFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToAndCallFunction, cancellationToken);
-        }
-
-        public Task<string> UpgradeToAndCallRequestAsync(string newImplementation, byte[] data)
-        {
-            var upgradeToAndCallFunction = new UpgradeToAndCallFunction();
-                upgradeToAndCallFunction.NewImplementation = newImplementation;
-                upgradeToAndCallFunction.Data = data;
-            
-             return ContractHandler.SendRequestAsync(upgradeToAndCallFunction);
-        }
-
-        public Task<TransactionReceipt> UpgradeToAndCallRequestAndWaitForReceiptAsync(string newImplementation, byte[] data, CancellationTokenSource cancellationToken = null)
-        {
-            var upgradeToAndCallFunction = new UpgradeToAndCallFunction();
-                upgradeToAndCallFunction.NewImplementation = newImplementation;
-                upgradeToAndCallFunction.Data = data;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToAndCallFunction, cancellationToken);
-        }
-
-        public Task<BigInteger> CurrentShipIdQueryAsync(CurrentShipIdFunction currentShipIdFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<CurrentShipIdFunction, BigInteger>(currentShipIdFunction, blockParameter);
-        }
-
-        
-        public Task<BigInteger> CurrentShipIdQueryAsync(BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<CurrentShipIdFunction, BigInteger>(null, blockParameter);
         }
 
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
@@ -221,66 +90,6 @@ namespace PirateNationContracts.ShipSystem
         public Task<BigInteger> GetIdQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
-        }
-
-        public Task<string> GrantLootRequestAsync(GrantLootFunction grantLootFunction)
-        {
-             return ContractHandler.SendRequestAsync(grantLootFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootRequestAndWaitForReceiptAsync(GrantLootFunction grantLootFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootRequestAsync(string account, BigInteger lootId, BigInteger amount)
-        {
-            var grantLootFunction = new GrantLootFunction();
-                grantLootFunction.Account = account;
-                grantLootFunction.LootId = lootId;
-                grantLootFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAsync(grantLootFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootRequestAndWaitForReceiptAsync(string account, BigInteger lootId, BigInteger amount, CancellationTokenSource cancellationToken = null)
-        {
-            var grantLootFunction = new GrantLootFunction();
-                grantLootFunction.Account = account;
-                grantLootFunction.LootId = lootId;
-                grantLootFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootForTestsRequestAsync(GrantLootForTestsFunction grantLootForTestsFunction)
-        {
-             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(GrantLootForTestsFunction grantLootForTestsFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootForTestsRequestAsync(string account, BigInteger lootId, BigInteger amount)
-        {
-            var grantLootForTestsFunction = new GrantLootForTestsFunction();
-                grantLootForTestsFunction.Account = account;
-                grantLootForTestsFunction.LootId = lootId;
-                grantLootForTestsFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(string account, BigInteger lootId, BigInteger amount, CancellationTokenSource cancellationToken = null)
-        {
-            var grantLootForTestsFunction = new GrantLootForTestsFunction();
-                grantLootForTestsFunction.Account = account;
-                grantLootForTestsFunction.LootId = lootId;
-                grantLootForTestsFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
         }
 
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)

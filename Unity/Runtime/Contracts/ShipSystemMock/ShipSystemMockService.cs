@@ -10,33 +10,33 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using PirateNationContracts.ShipSystem.ContractDefinition;
+using PirateNationContracts.ShipSystemMock.ContractDefinition;
 
-namespace PirateNationContracts.ShipSystem
+namespace PirateNationContracts.ShipSystemMock
 {
-    public partial class ShipSystemService
+    public partial class ShipSystemMockService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipSystemMockDeployment shipSystemMockDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAndWaitForReceiptAsync(shipSystemDeployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<ShipSystemMockDeployment>().SendRequestAndWaitForReceiptAsync(shipSystemMockDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipSystemMockDeployment shipSystemMockDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAsync(shipSystemDeployment);
+            return web3.Eth.GetContractDeploymentHandler<ShipSystemMockDeployment>().SendRequestAsync(shipSystemMockDeployment);
         }
 
-        public static async Task<ShipSystemService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<ShipSystemMockService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipSystemMockDeployment shipSystemMockDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipSystemDeployment, cancellationTokenSource);
-            return new ShipSystemService(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipSystemMockDeployment, cancellationTokenSource);
+            return new ShipSystemMockService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public ShipSystemService(Nethereum.Web3.Web3 web3, string contractAddress)
+        public ShipSystemMockService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);

@@ -10,33 +10,33 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using PirateNationContracts.ShipSystem.ContractDefinition;
+using PirateNationContracts.ShipNFTBeforeTokenTransferHandler.ContractDefinition;
 
-namespace PirateNationContracts.ShipSystem
+namespace PirateNationContracts.ShipNFTBeforeTokenTransferHandler
 {
-    public partial class ShipSystemService
+    public partial class ShipNFTBeforeTokenTransferHandlerService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ShipNFTBeforeTokenTransferHandlerDeployment shipNFTBeforeTokenTransferHandlerDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAndWaitForReceiptAsync(shipSystemDeployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<ShipNFTBeforeTokenTransferHandlerDeployment>().SendRequestAndWaitForReceiptAsync(shipNFTBeforeTokenTransferHandlerDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ShipNFTBeforeTokenTransferHandlerDeployment shipNFTBeforeTokenTransferHandlerDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<ShipSystemDeployment>().SendRequestAsync(shipSystemDeployment);
+            return web3.Eth.GetContractDeploymentHandler<ShipNFTBeforeTokenTransferHandlerDeployment>().SendRequestAsync(shipNFTBeforeTokenTransferHandlerDeployment);
         }
 
-        public static async Task<ShipSystemService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipSystemDeployment shipSystemDeployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<ShipNFTBeforeTokenTransferHandlerService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ShipNFTBeforeTokenTransferHandlerDeployment shipNFTBeforeTokenTransferHandlerDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipSystemDeployment, cancellationTokenSource);
-            return new ShipSystemService(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, shipNFTBeforeTokenTransferHandlerDeployment, cancellationTokenSource);
+            return new ShipNFTBeforeTokenTransferHandlerService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public ShipSystemService(Nethereum.Web3.Web3 web3, string contractAddress)
+        public ShipNFTBeforeTokenTransferHandlerService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
@@ -162,17 +162,6 @@ namespace PirateNationContracts.ShipSystem
              return ContractHandler.SendRequestAndWaitForReceiptAsync(upgradeToAndCallFunction, cancellationToken);
         }
 
-        public Task<BigInteger> CurrentShipIdQueryAsync(CurrentShipIdFunction currentShipIdFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<CurrentShipIdFunction, BigInteger>(currentShipIdFunction, blockParameter);
-        }
-
-        
-        public Task<BigInteger> CurrentShipIdQueryAsync(BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<CurrentShipIdFunction, BigInteger>(null, blockParameter);
-        }
-
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
         {
              return ContractHandler.SendRequestAsync(fulfillRandomWordsCallbackFunction);
@@ -221,66 +210,6 @@ namespace PirateNationContracts.ShipSystem
         public Task<BigInteger> GetIdQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
-        }
-
-        public Task<string> GrantLootRequestAsync(GrantLootFunction grantLootFunction)
-        {
-             return ContractHandler.SendRequestAsync(grantLootFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootRequestAndWaitForReceiptAsync(GrantLootFunction grantLootFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootRequestAsync(string account, BigInteger lootId, BigInteger amount)
-        {
-            var grantLootFunction = new GrantLootFunction();
-                grantLootFunction.Account = account;
-                grantLootFunction.LootId = lootId;
-                grantLootFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAsync(grantLootFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootRequestAndWaitForReceiptAsync(string account, BigInteger lootId, BigInteger amount, CancellationTokenSource cancellationToken = null)
-        {
-            var grantLootFunction = new GrantLootFunction();
-                grantLootFunction.Account = account;
-                grantLootFunction.LootId = lootId;
-                grantLootFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootForTestsRequestAsync(GrantLootForTestsFunction grantLootForTestsFunction)
-        {
-             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(GrantLootForTestsFunction grantLootForTestsFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
-        }
-
-        public Task<string> GrantLootForTestsRequestAsync(string account, BigInteger lootId, BigInteger amount)
-        {
-            var grantLootForTestsFunction = new GrantLootForTestsFunction();
-                grantLootForTestsFunction.Account = account;
-                grantLootForTestsFunction.LootId = lootId;
-                grantLootForTestsFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
-        }
-
-        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(string account, BigInteger lootId, BigInteger amount, CancellationTokenSource cancellationToken = null)
-        {
-            var grantLootForTestsFunction = new GrantLootForTestsFunction();
-                grantLootForTestsFunction.Account = account;
-                grantLootForTestsFunction.LootId = lootId;
-                grantLootForTestsFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
         }
 
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
