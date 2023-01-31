@@ -233,7 +233,7 @@
     "RequirementSystem": "0x2E0428f0DefD236AbAeeF3A01A31320A324BFaB3",
     "RequirementSystem_Implementation": "0xFD89aCE3F67680fAA9FdfCE3DD7fE35F9cfA5fc3",
     "RequirementSystem_Proxy": "0x2E0428f0DefD236AbAeeF3A01A31320A324BFaB3",
-    "ShipNFT": "0x45ed0c87c345243746aa368409d05326437E86b2",
+    "ShipNFT": "0x8B99760E722A1352203990115077f13dB6986B31",
     "ShipNFTBeforeTokenTransferHandler": "0x75ccb8667b2C735B82d9Fb7740D0c055f78B10B4",
     "ShipNFTBeforeTokenTransferHandler_Implementation": "0x796583E6399976019797B5f797283E9Ef402851F",
     "ShipNFTBeforeTokenTransferHandler_Proxy": "0x75ccb8667b2C735B82d9Fb7740D0c055f78B10B4",
@@ -244,7 +244,7 @@
     "ShipSystemMock": "0xAB7020429165726571378464f0986c95939D1695",
     "ShipSystemMock_Implementation": "0x923a479E22B10104c9bED7eF2e0772FbaB4752Fb",
     "ShipSystemMock_Proxy": "0xAB7020429165726571378464f0986c95939D1695",
-    "ShipSystem_Implementation": "0x70a07863b92B3dB24f5a125C2A8AF0d561D98daE",
+    "ShipSystem_Implementation": "0x5c1e62e1D0d99442CADFEb2A4abE9C73340388A1",
     "ShipSystem_Proxy": "0xF8A761d20B4f6B98Aa4a9Db785322a283d61E318",
     "TA_GiveEnergy": "0x246526D6D24b410Abc4ebF12B19fC2B6b1018Ef5",
     "TA_GiveEnergy_Implementation": "0x55D2cBeD2457B9Ad6C1998A804f497427051d6ce",
@@ -256,7 +256,7 @@
     "TokenTemplateSystem_Implementation": "0xaa1F0e57d339117CAC535477DfE22Ce6DCD0817E",
     "TokenTemplateSystem_Proxy": "0xe5Ba71f675A691E9c8498EbDf451E91F6F923c88",
     "TraitsProvider": "0x4E08fBbfCaE8b4CE6C8ed349e6f7E17dA544D919",
-    "TraitsProvider_Implementation": "0x8FcB24C72fa4338D38Fc2D696Bb6Bf0Fb0252a2f",
+    "TraitsProvider_Implementation": "0xd05f1a1E0e56243fF40C02BdA129E18d3e3b3949",
     "TraitsProvider_Proxy": "0x4E08fBbfCaE8b4CE6C8ed349e6f7E17dA544D919"
   }
 }

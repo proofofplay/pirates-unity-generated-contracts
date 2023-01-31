@@ -125,6 +125,19 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
         public virtual BigInteger Amount { get; set; }
     }
 
+    public partial class GrantLootForTestsFunction : GrantLootForTestsFunctionBase { }
+
+    [Function("grantLootForTests")]
+    public class GrantLootForTestsFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "account", 1)]
+        public virtual string Account { get; set; }
+        [Parameter("uint256", "lootId", 2)]
+        public virtual BigInteger LootId { get; set; }
+        [Parameter("uint256", "amount", 3)]
+        public virtual BigInteger Amount { get; set; }
+    }
+
     public partial class InitializeFunction : InitializeFunctionBase { }
 
     [Function("initialize")]
@@ -323,6 +336,8 @@ namespace PirateNationContracts.ShipSystem.ContractDefinition
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
     }
+
+
 
 
 

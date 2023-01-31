@@ -133,6 +133,36 @@ namespace PirateNationContracts.ShipSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootFunction, cancellationToken);
         }
 
+        public Task<string> GrantLootForTestsRequestAsync(GrantLootForTestsFunction grantLootForTestsFunction)
+        {
+             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(GrantLootForTestsFunction grantLootForTestsFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
+        }
+
+        public Task<string> GrantLootForTestsRequestAsync(string account, BigInteger lootId, BigInteger amount)
+        {
+            var grantLootForTestsFunction = new GrantLootForTestsFunction();
+                grantLootForTestsFunction.Account = account;
+                grantLootForTestsFunction.LootId = lootId;
+                grantLootForTestsFunction.Amount = amount;
+            
+             return ContractHandler.SendRequestAsync(grantLootForTestsFunction);
+        }
+
+        public Task<TransactionReceipt> GrantLootForTestsRequestAndWaitForReceiptAsync(string account, BigInteger lootId, BigInteger amount, CancellationTokenSource cancellationToken = null)
+        {
+            var grantLootForTestsFunction = new GrantLootForTestsFunction();
+                grantLootForTestsFunction.Account = account;
+                grantLootForTestsFunction.LootId = lootId;
+                grantLootForTestsFunction.Amount = amount;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(grantLootForTestsFunction, cancellationToken);
+        }
+
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
         {
              return ContractHandler.SendRequestAsync(initializeFunction);
