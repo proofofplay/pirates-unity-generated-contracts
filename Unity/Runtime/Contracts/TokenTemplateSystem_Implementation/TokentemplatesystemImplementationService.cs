@@ -42,6 +42,32 @@ namespace PirateNationContracts.TokenTemplateSystem_Implementation
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
+        public Task<string> CreateEntityRequestAsync(CreateEntityFunction createEntityFunction)
+        {
+             return ContractHandler.SendRequestAsync(createEntityFunction);
+        }
+
+        public Task<TransactionReceipt> CreateEntityRequestAndWaitForReceiptAsync(CreateEntityFunction createEntityFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(createEntityFunction, cancellationToken);
+        }
+
+        public Task<string> CreateEntityRequestAsync(BigInteger entityId)
+        {
+            var createEntityFunction = new CreateEntityFunction();
+                createEntityFunction.EntityId = entityId;
+            
+             return ContractHandler.SendRequestAsync(createEntityFunction);
+        }
+
+        public Task<TransactionReceipt> CreateEntityRequestAndWaitForReceiptAsync(BigInteger entityId, CancellationTokenSource cancellationToken = null)
+        {
+            var createEntityFunction = new CreateEntityFunction();
+                createEntityFunction.EntityId = entityId;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(createEntityFunction, cancellationToken);
+        }
+
         public Task<bool> ExistsQueryAsync(ExistsFunction existsFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<ExistsFunction, bool>(existsFunction, blockParameter);
@@ -151,6 +177,38 @@ namespace PirateNationContracts.TokenTemplateSystem_Implementation
             return ContractHandler.QueryDeserializingToObjectAsync<GetTemplateFunction, GetTemplateOutputDTO>(getTemplateFunction, blockParameter);
         }
 
+        public Task<bool> GetTraitBoolQueryAsync(GetTraitBoolFunction getTraitBoolFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitBoolFunction, bool>(getTraitBoolFunction, blockParameter);
+        }
+
+        
+        public Task<bool> GetTraitBoolQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var getTraitBoolFunction = new GetTraitBoolFunction();
+                getTraitBoolFunction.TokenContract = tokenContract;
+                getTraitBoolFunction.TokenId = tokenId;
+                getTraitBoolFunction.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<GetTraitBoolFunction, bool>(getTraitBoolFunction, blockParameter);
+        }
+
+        public Task<byte[]> GetTraitBytesQueryAsync(GetTraitBytesFunction getTraitBytesFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitBytesFunction, byte[]>(getTraitBytesFunction, blockParameter);
+        }
+
+        
+        public Task<byte[]> GetTraitBytesQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var getTraitBytesFunction = new GetTraitBytesFunction();
+                getTraitBytesFunction.TokenContract = tokenContract;
+                getTraitBytesFunction.TokenId = tokenId;
+                getTraitBytesFunction.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<GetTraitBytesFunction, byte[]>(getTraitBytesFunction, blockParameter);
+        }
+
         public Task<List<BigInteger>> GetTraitIdsQueryAsync(GetTraitIdsFunction getTraitIdsFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
@@ -164,6 +222,70 @@ namespace PirateNationContracts.TokenTemplateSystem_Implementation
                 getTraitIdsFunction.TokenId = tokenId;
             
             return ContractHandler.QueryAsync<GetTraitIdsFunction, List<BigInteger>>(getTraitIdsFunction, blockParameter);
+        }
+
+        public Task<BigInteger> GetTraitInt256QueryAsync(GetTraitInt256Function getTraitInt256Function, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitInt256Function, BigInteger>(getTraitInt256Function, blockParameter);
+        }
+
+        
+        public Task<BigInteger> GetTraitInt256QueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var getTraitInt256Function = new GetTraitInt256Function();
+                getTraitInt256Function.TokenContract = tokenContract;
+                getTraitInt256Function.TokenId = tokenId;
+                getTraitInt256Function.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<GetTraitInt256Function, BigInteger>(getTraitInt256Function, blockParameter);
+        }
+
+        public Task<string> GetTraitStringQueryAsync(GetTraitStringFunction getTraitStringFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitStringFunction, string>(getTraitStringFunction, blockParameter);
+        }
+
+        
+        public Task<string> GetTraitStringQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var getTraitStringFunction = new GetTraitStringFunction();
+                getTraitStringFunction.TokenContract = tokenContract;
+                getTraitStringFunction.TokenId = tokenId;
+                getTraitStringFunction.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<GetTraitStringFunction, string>(getTraitStringFunction, blockParameter);
+        }
+
+        public Task<BigInteger> GetTraitUint256QueryAsync(GetTraitUint256Function getTraitUint256Function, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetTraitUint256Function, BigInteger>(getTraitUint256Function, blockParameter);
+        }
+
+        
+        public Task<BigInteger> GetTraitUint256QueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var getTraitUint256Function = new GetTraitUint256Function();
+                getTraitUint256Function.TokenContract = tokenContract;
+                getTraitUint256Function.TokenId = tokenId;
+                getTraitUint256Function.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<GetTraitUint256Function, BigInteger>(getTraitUint256Function, blockParameter);
+        }
+
+        public Task<bool> HasTraitQueryAsync(HasTraitFunction hasTraitFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<HasTraitFunction, bool>(hasTraitFunction, blockParameter);
+        }
+
+        
+        public Task<bool> HasTraitQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
+        {
+            var hasTraitFunction = new HasTraitFunction();
+                hasTraitFunction.TokenContract = tokenContract;
+                hasTraitFunction.TokenId = tokenId;
+                hasTraitFunction.TraitId = traitId;
+            
+            return ContractHandler.QueryAsync<HasTraitFunction, bool>(hasTraitFunction, blockParameter);
         }
 
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
@@ -190,6 +312,20 @@ namespace PirateNationContracts.TokenTemplateSystem_Implementation
                 initializeFunction.GameRegistryAddress = gameRegistryAddress;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(initializeFunction, cancellationToken);
+        }
+
+        public Task<bool> InitializedEntitiesQueryAsync(InitializedEntitiesFunction initializedEntitiesFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<InitializedEntitiesFunction, bool>(initializedEntitiesFunction, blockParameter);
+        }
+
+        
+        public Task<bool> InitializedEntitiesQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
+        {
+            var initializedEntitiesFunction = new InitializedEntitiesFunction();
+                initializedEntitiesFunction.ReturnValue1 = returnValue1;
+            
+            return ContractHandler.QueryAsync<InitializedEntitiesFunction, bool>(initializedEntitiesFunction, blockParameter);
         }
 
         public Task<bool> IsTrustedForwarderQueryAsync(IsTrustedForwarderFunction isTrustedForwarderFunction, BlockParameter blockParameter = null)

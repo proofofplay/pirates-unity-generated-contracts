@@ -103,20 +103,6 @@ namespace PirateNationContracts.ShipSystem_Implementation
             return ContractHandler.QueryAsync<GetIdFunction, BigInteger>(null, blockParameter);
         }
 
-        public Task<GetTokenTotalsDataOutputDTO> GetTokenTotalsDataQueryAsync(GetTokenTotalsDataFunction getTokenTotalsDataFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetTokenTotalsDataFunction, GetTokenTotalsDataOutputDTO>(getTokenTotalsDataFunction, blockParameter);
-        }
-
-        public Task<GetTokenTotalsDataOutputDTO> GetTokenTotalsDataQueryAsync(string tokenContract, BigInteger tokenId, BlockParameter blockParameter = null)
-        {
-            var getTokenTotalsDataFunction = new GetTokenTotalsDataFunction();
-                getTokenTotalsDataFunction.TokenContract = tokenContract;
-                getTokenTotalsDataFunction.TokenId = tokenId;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<GetTokenTotalsDataFunction, GetTokenTotalsDataOutputDTO>(getTokenTotalsDataFunction, blockParameter);
-        }
-
         public Task<string> GrantLootRequestAsync(GrantLootFunction grantLootFunction)
         {
              return ContractHandler.SendRequestAsync(grantLootFunction);

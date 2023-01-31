@@ -36,30 +36,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
 
     }
 
-    public partial class GamenftInterfaceidFunction : GamenftInterfaceidFunctionBase { }
-
-    [Function("GAMENFT_INTERFACEID", "bytes4")]
-    public class GamenftInterfaceidFunctionBase : FunctionMessage
-    {
-
-    }
-
-    public partial class Ierc721bridgablechildInterfaceidFunction : Ierc721bridgablechildInterfaceidFunctionBase { }
-
-    [Function("IERC721BRIDGABLECHILD_INTERFACEID", "bytes4")]
-    public class Ierc721bridgablechildInterfaceidFunctionBase : FunctionMessage
-    {
-
-    }
-
-    public partial class ItraitsconsumerInterfaceidFunction : ItraitsconsumerInterfaceidFunctionBase { }
-
-    [Function("ITRAITSCONSUMER_INTERFACEID", "bytes4")]
-    public class ItraitsconsumerInterfaceidFunctionBase : FunctionMessage
-    {
-
-    }
-
     public partial class BaseExternalURIFunction : BaseExternalURIFunctionBase { }
 
     [Function("_baseExternalURI", "string")]
@@ -137,15 +113,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
         public virtual BigInteger Id { get; set; }
     }
 
-    public partial class BurnForTestsFunction : BurnForTestsFunctionBase { }
-
-    [Function("burnForTests")]
-    public class BurnForTestsFunctionBase : FunctionMessage
-    {
-        [Parameter("uint256", "tokenId", 1)]
-        public virtual BigInteger TokenId { get; set; }
-    }
-
     public partial class ContractURIFunction : ContractURIFunctionBase { }
 
     [Function("contractURI", "string")]
@@ -158,17 +125,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
 
     [Function("deposit")]
     public class DepositFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
-        [Parameter("bytes", "depositData", 2)]
-        public virtual byte[] DepositData { get; set; }
-    }
-
-    public partial class DepositForTestsFunction : DepositForTestsFunctionBase { }
-
-    [Function("depositForTests")]
-    public class DepositForTestsFunctionBase : FunctionMessage
     {
         [Parameter("address", "to", 1)]
         public virtual string To { get; set; }
@@ -305,28 +261,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
         public virtual string To { get; set; }
         [Parameter("uint256", "id", 2)]
         public virtual BigInteger Id { get; set; }
-    }
-
-    public partial class MintForTestsFunction : MintForTestsFunctionBase { }
-
-    [Function("mintForTests")]
-    public class MintForTestsFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
-    }
-
-    public partial class MintWithoutTraitsFunction : MintWithoutTraitsFunctionBase { }
-
-    [Function("mintWithoutTraits")]
-    public class MintWithoutTraitsFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
     }
 
     public partial class NameFunction : NameFunctionBase { }
@@ -758,33 +692,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
         public virtual BigInteger ReturnValue1 { get; set; }
     }
 
-    public partial class GamenftInterfaceidOutputDTO : GamenftInterfaceidOutputDTOBase { }
-
-    [FunctionOutput]
-    public class GamenftInterfaceidOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("bytes4", "", 1)]
-        public virtual byte[] ReturnValue1 { get; set; }
-    }
-
-    public partial class Ierc721bridgablechildInterfaceidOutputDTO : Ierc721bridgablechildInterfaceidOutputDTOBase { }
-
-    [FunctionOutput]
-    public class Ierc721bridgablechildInterfaceidOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("bytes4", "", 1)]
-        public virtual byte[] ReturnValue1 { get; set; }
-    }
-
-    public partial class ItraitsconsumerInterfaceidOutputDTO : ItraitsconsumerInterfaceidOutputDTOBase { }
-
-    [FunctionOutput]
-    public class ItraitsconsumerInterfaceidOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("bytes4", "", 1)]
-        public virtual byte[] ReturnValue1 { get; set; }
-    }
-
     public partial class BaseExternalURIOutputDTO : BaseExternalURIOutputDTOBase { }
 
     [FunctionOutput]
@@ -852,8 +759,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
 
 
 
-
-
     public partial class ContractURIOutputDTO : ContractURIOutputDTOBase { }
 
     [FunctionOutput]
@@ -862,8 +767,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
         [Parameter("string", "", 1)]
         public virtual string ReturnValue1 { get; set; }
     }
-
-
 
 
 
@@ -976,10 +879,6 @@ namespace PirateNationContracts.ShipNFT.ContractDefinition
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
     }
-
-
-
-
 
 
 
