@@ -117,10 +117,10 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         public virtual BigInteger TokenId { get; set; }
     }
 
-    public partial class GenerateTokenURI1Function : GenerateTokenURI1FunctionBase { }
+    public partial class GenerateTokenURIWithExtraFunction : GenerateTokenURIWithExtraFunctionBase { }
 
-    [Function("generateTokenURI", "string")]
-    public class GenerateTokenURI1FunctionBase : FunctionMessage
+    [Function("generateTokenURIWithExtra", "string")]
+    public class GenerateTokenURIWithExtraFunctionBase : FunctionMessage
     {
         [Parameter("address", "tokenContract", 1)]
         public virtual string TokenContract { get; set; }
@@ -448,6 +448,15 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         public virtual BigInteger TraitId { get; set; }
     }
 
+    public partial class TokenIdExceedsMaxValueError : TokenIdExceedsMaxValueErrorBase { }
+
+    [Error("TokenIdExceedsMaxValue")]
+    public class TokenIdExceedsMaxValueErrorBase : IErrorDTO
+    {
+        [Parameter("uint256", "tokenId", 1)]
+        public virtual BigInteger TokenId { get; set; }
+    }
+
 
 
 
@@ -480,10 +489,10 @@ namespace PirateNationContracts.TokenTemplateSystem.ContractDefinition
         public virtual string ReturnValue1 { get; set; }
     }
 
-    public partial class GenerateTokenURI1OutputDTO : GenerateTokenURI1OutputDTOBase { }
+    public partial class GenerateTokenURIWithExtraOutputDTO : GenerateTokenURIWithExtraOutputDTOBase { }
 
     [FunctionOutput]
-    public class GenerateTokenURI1OutputDTOBase : IFunctionOutputDTO 
+    public class GenerateTokenURIWithExtraOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("string", "", 1)]
         public virtual string ReturnValue1 { get; set; }
