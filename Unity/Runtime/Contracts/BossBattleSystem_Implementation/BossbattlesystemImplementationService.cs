@@ -42,6 +42,19 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
+        public Task<BossEntityToFinalBlowOutputDTO> BossEntityToFinalBlowQueryAsync(BossEntityToFinalBlowFunction bossEntityToFinalBlowFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryDeserializingToObjectAsync<BossEntityToFinalBlowFunction, BossEntityToFinalBlowOutputDTO>(bossEntityToFinalBlowFunction, blockParameter);
+        }
+
+        public Task<BossEntityToFinalBlowOutputDTO> BossEntityToFinalBlowQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
+        {
+            var bossEntityToFinalBlowFunction = new BossEntityToFinalBlowFunction();
+                bossEntityToFinalBlowFunction.ReturnValue1 = returnValue1;
+            
+            return ContractHandler.QueryDeserializingToObjectAsync<BossEntityToFinalBlowFunction, BossEntityToFinalBlowOutputDTO>(bossEntityToFinalBlowFunction, blockParameter);
+        }
+
         public Task<string> EndBattleRequestAsync(EndBattleFunction endBattleFunction)
         {
              return ContractHandler.SendRequestAsync(endBattleFunction);
@@ -52,24 +65,18 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync(endBattleFunction, cancellationToken);
         }
 
-        public Task<string> EndBattleRequestAsync(BigInteger battleEntity, List<BigInteger> moves, BigInteger totalDamageTaken, BigInteger totalDamageDealt)
+        public Task<string> EndBattleRequestAsync(EndBattleParams @params)
         {
             var endBattleFunction = new EndBattleFunction();
-                endBattleFunction.BattleEntity = battleEntity;
-                endBattleFunction.Moves = moves;
-                endBattleFunction.TotalDamageTaken = totalDamageTaken;
-                endBattleFunction.TotalDamageDealt = totalDamageDealt;
+                endBattleFunction.Params = @params;
             
              return ContractHandler.SendRequestAsync(endBattleFunction);
         }
 
-        public Task<TransactionReceipt> EndBattleRequestAndWaitForReceiptAsync(BigInteger battleEntity, List<BigInteger> moves, BigInteger totalDamageTaken, BigInteger totalDamageDealt, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> EndBattleRequestAndWaitForReceiptAsync(EndBattleParams @params, CancellationTokenSource cancellationToken = null)
         {
             var endBattleFunction = new EndBattleFunction();
-                endBattleFunction.BattleEntity = battleEntity;
-                endBattleFunction.Moves = moves;
-                endBattleFunction.TotalDamageTaken = totalDamageTaken;
-                endBattleFunction.TotalDamageDealt = totalDamageDealt;
+                endBattleFunction.Params = @params;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(endBattleFunction, cancellationToken);
         }

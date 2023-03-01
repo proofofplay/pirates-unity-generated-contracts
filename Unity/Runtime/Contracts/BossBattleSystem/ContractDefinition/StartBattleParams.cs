@@ -11,11 +11,13 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
 
     public class StartBattleParamsBase 
     {
-        [Parameter("uint256", "shipEntity", 1)]
+        [Parameter("uint256", "battleSeed", 1)]
+        public virtual BigInteger BattleSeed { get; set; }
+        [Parameter("uint256", "shipEntity", 2)]
         public virtual BigInteger ShipEntity { get; set; }
-        [Parameter("uint256", "bossEntity", 2)]
+        [Parameter("uint256", "bossEntity", 3)]
         public virtual BigInteger BossEntity { get; set; }
-        [Parameter("uint256[]", "shipOverloads", 3)]
+        [Parameter("uint256[]", "shipOverloads", 4)]
         public virtual List<BigInteger> ShipOverloads { get; set; }
     }
 }
