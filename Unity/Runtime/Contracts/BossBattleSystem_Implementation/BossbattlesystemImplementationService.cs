@@ -91,24 +91,18 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync(endBattleMockFunction, cancellationToken);
         }
 
-        public Task<string> EndBattleMockRequestAsync(BigInteger battleEntity, List<BigInteger> moves, BigInteger totalDamageTaken, BigInteger totalDamageDealt)
+        public Task<string> EndBattleMockRequestAsync(EndBattleParams @params)
         {
             var endBattleMockFunction = new EndBattleMockFunction();
-                endBattleMockFunction.BattleEntity = battleEntity;
-                endBattleMockFunction.Moves = moves;
-                endBattleMockFunction.TotalDamageTaken = totalDamageTaken;
-                endBattleMockFunction.TotalDamageDealt = totalDamageDealt;
+                endBattleMockFunction.Params = @params;
             
              return ContractHandler.SendRequestAsync(endBattleMockFunction);
         }
 
-        public Task<TransactionReceipt> EndBattleMockRequestAndWaitForReceiptAsync(BigInteger battleEntity, List<BigInteger> moves, BigInteger totalDamageTaken, BigInteger totalDamageDealt, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> EndBattleMockRequestAndWaitForReceiptAsync(EndBattleParams @params, CancellationTokenSource cancellationToken = null)
         {
             var endBattleMockFunction = new EndBattleMockFunction();
-                endBattleMockFunction.BattleEntity = battleEntity;
-                endBattleMockFunction.Moves = moves;
-                endBattleMockFunction.TotalDamageTaken = totalDamageTaken;
-                endBattleMockFunction.TotalDamageDealt = totalDamageDealt;
+                endBattleMockFunction.Params = @params;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(endBattleMockFunction, cancellationToken);
         }
@@ -141,6 +135,20 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync(fulfillRandomWordsCallbackFunction, cancellationToken);
         }
 
+        public Task<uint> GetAccountCooldownQueryAsync(GetAccountCooldownFunction getAccountCooldownFunction, BlockParameter blockParameter = null)
+        {
+            return ContractHandler.QueryAsync<GetAccountCooldownFunction, uint>(getAccountCooldownFunction, blockParameter);
+        }
+
+        
+        public Task<uint> GetAccountCooldownQueryAsync(string account, BlockParameter blockParameter = null)
+        {
+            var getAccountCooldownFunction = new GetAccountCooldownFunction();
+                getAccountCooldownFunction.Account = account;
+            
+            return ContractHandler.QueryAsync<GetAccountCooldownFunction, uint>(getAccountCooldownFunction, blockParameter);
+        }
+
         public Task<GetActiveBattleOutputDTO> GetActiveBattleQueryAsync(GetActiveBattleFunction getActiveBattleFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleFunction, GetActiveBattleOutputDTO>(getActiveBattleFunction, blockParameter);
@@ -154,17 +162,17 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
             return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleFunction, GetActiveBattleOutputDTO>(getActiveBattleFunction, blockParameter);
         }
 
-        public Task<GetActiveBattleByWalletOutputDTO> GetActiveBattleByWalletQueryAsync(GetActiveBattleByWalletFunction getActiveBattleByWalletFunction, BlockParameter blockParameter = null)
+        public Task<GetActiveBattleByAccountOutputDTO> GetActiveBattleByAccountQueryAsync(GetActiveBattleByAccountFunction getActiveBattleByAccountFunction, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleByWalletFunction, GetActiveBattleByWalletOutputDTO>(getActiveBattleByWalletFunction, blockParameter);
+            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleByAccountFunction, GetActiveBattleByAccountOutputDTO>(getActiveBattleByAccountFunction, blockParameter);
         }
 
-        public Task<GetActiveBattleByWalletOutputDTO> GetActiveBattleByWalletQueryAsync(string wallet, BlockParameter blockParameter = null)
+        public Task<GetActiveBattleByAccountOutputDTO> GetActiveBattleByAccountQueryAsync(string account, BlockParameter blockParameter = null)
         {
-            var getActiveBattleByWalletFunction = new GetActiveBattleByWalletFunction();
-                getActiveBattleByWalletFunction.Wallet = wallet;
+            var getActiveBattleByAccountFunction = new GetActiveBattleByAccountFunction();
+                getActiveBattleByAccountFunction.Account = account;
             
-            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleByWalletFunction, GetActiveBattleByWalletOutputDTO>(getActiveBattleByWalletFunction, blockParameter);
+            return ContractHandler.QueryDeserializingToObjectAsync<GetActiveBattleByAccountFunction, GetActiveBattleByAccountOutputDTO>(getActiveBattleByAccountFunction, blockParameter);
         }
 
         public Task<GetBattleOutputDTO> GetBattleQueryAsync(GetBattleFunction getBattleFunction, BlockParameter blockParameter = null)
@@ -254,20 +262,6 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
             return ContractHandler.QueryDeserializingToObjectAsync<GetTokenFunction, GetTokenOutputDTO>(getTokenFunction, blockParameter);
         }
 
-        public Task<uint> GetWalletCooldownQueryAsync(GetWalletCooldownFunction getWalletCooldownFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<GetWalletCooldownFunction, uint>(getWalletCooldownFunction, blockParameter);
-        }
-
-        
-        public Task<uint> GetWalletCooldownQueryAsync(string wallet, BlockParameter blockParameter = null)
-        {
-            var getWalletCooldownFunction = new GetWalletCooldownFunction();
-                getWalletCooldownFunction.Wallet = wallet;
-            
-            return ContractHandler.QueryAsync<GetWalletCooldownFunction, uint>(getWalletCooldownFunction, blockParameter);
-        }
-
         public Task<string> InitializeRequestAsync(InitializeFunction initializeFunction)
         {
              return ContractHandler.SendRequestAsync(initializeFunction);
@@ -350,6 +344,32 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync<RenounceOwnershipFunction>(null, cancellationToken);
         }
 
+        public Task<string> RewindAccountCooldownRequestAsync(RewindAccountCooldownFunction rewindAccountCooldownFunction)
+        {
+             return ContractHandler.SendRequestAsync(rewindAccountCooldownFunction);
+        }
+
+        public Task<TransactionReceipt> RewindAccountCooldownRequestAndWaitForReceiptAsync(RewindAccountCooldownFunction rewindAccountCooldownFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(rewindAccountCooldownFunction, cancellationToken);
+        }
+
+        public Task<string> RewindAccountCooldownRequestAsync(uint rewindTime)
+        {
+            var rewindAccountCooldownFunction = new RewindAccountCooldownFunction();
+                rewindAccountCooldownFunction.RewindTime = rewindTime;
+            
+             return ContractHandler.SendRequestAsync(rewindAccountCooldownFunction);
+        }
+
+        public Task<TransactionReceipt> RewindAccountCooldownRequestAndWaitForReceiptAsync(uint rewindTime, CancellationTokenSource cancellationToken = null)
+        {
+            var rewindAccountCooldownFunction = new RewindAccountCooldownFunction();
+                rewindAccountCooldownFunction.RewindTime = rewindTime;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(rewindAccountCooldownFunction, cancellationToken);
+        }
+
         public Task<string> RewindBattleTimelimitRequestAsync(RewindBattleTimelimitFunction rewindBattleTimelimitFunction)
         {
              return ContractHandler.SendRequestAsync(rewindBattleTimelimitFunction);
@@ -404,32 +424,6 @@ namespace PirateNationContracts.BossBattleSystem_Implementation
                 rewindShipCooldownFunction.RewindTime = rewindTime;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(rewindShipCooldownFunction, cancellationToken);
-        }
-
-        public Task<string> RewindWalletCooldownRequestAsync(RewindWalletCooldownFunction rewindWalletCooldownFunction)
-        {
-             return ContractHandler.SendRequestAsync(rewindWalletCooldownFunction);
-        }
-
-        public Task<TransactionReceipt> RewindWalletCooldownRequestAndWaitForReceiptAsync(RewindWalletCooldownFunction rewindWalletCooldownFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(rewindWalletCooldownFunction, cancellationToken);
-        }
-
-        public Task<string> RewindWalletCooldownRequestAsync(uint rewindTime)
-        {
-            var rewindWalletCooldownFunction = new RewindWalletCooldownFunction();
-                rewindWalletCooldownFunction.RewindTime = rewindTime;
-            
-             return ContractHandler.SendRequestAsync(rewindWalletCooldownFunction);
-        }
-
-        public Task<TransactionReceipt> RewindWalletCooldownRequestAndWaitForReceiptAsync(uint rewindTime, CancellationTokenSource cancellationToken = null)
-        {
-            var rewindWalletCooldownFunction = new RewindWalletCooldownFunction();
-                rewindWalletCooldownFunction.RewindTime = rewindTime;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(rewindWalletCooldownFunction, cancellationToken);
         }
 
         public Task<string> SetFullValidationFlagRequestAsync(SetFullValidationFlagFunction setFullValidationFlagFunction)

@@ -100,14 +100,8 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
     [Function("endBattleMock")]
     public class EndBattleMockFunctionBase : FunctionMessage
     {
-        [Parameter("uint256", "battleEntity", 1)]
-        public virtual BigInteger BattleEntity { get; set; }
-        [Parameter("uint256[]", "moves", 2)]
-        public virtual List<BigInteger> Moves { get; set; }
-        [Parameter("uint256", "totalDamageTaken", 3)]
-        public virtual BigInteger TotalDamageTaken { get; set; }
-        [Parameter("uint256", "totalDamageDealt", 4)]
-        public virtual BigInteger TotalDamageDealt { get; set; }
+        [Parameter("tuple", "params", 1)]
+        public virtual EndBattleParams Params { get; set; }
     }
 
     public partial class FulfillRandomWordsCallbackFunction : FulfillRandomWordsCallbackFunctionBase { }
@@ -121,6 +115,15 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual List<BigInteger> RandomWords { get; set; }
     }
 
+    public partial class GetAccountCooldownFunction : GetAccountCooldownFunctionBase { }
+
+    [Function("getAccountCooldown", "uint32")]
+    public class GetAccountCooldownFunctionBase : FunctionMessage
+    {
+        [Parameter("address", "account", 1)]
+        public virtual string Account { get; set; }
+    }
+
     public partial class GetActiveBattleFunction : GetActiveBattleFunctionBase { }
 
     [Function("getActiveBattle", typeof(GetActiveBattleOutputDTO))]
@@ -130,13 +133,13 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual BigInteger BattleEntity { get; set; }
     }
 
-    public partial class GetActiveBattleByWalletFunction : GetActiveBattleByWalletFunctionBase { }
+    public partial class GetActiveBattleByAccountFunction : GetActiveBattleByAccountFunctionBase { }
 
-    [Function("getActiveBattleByWallet", typeof(GetActiveBattleByWalletOutputDTO))]
-    public class GetActiveBattleByWalletFunctionBase : FunctionMessage
+    [Function("getActiveBattleByAccount", typeof(GetActiveBattleByAccountOutputDTO))]
+    public class GetActiveBattleByAccountFunctionBase : FunctionMessage
     {
-        [Parameter("address", "wallet", 1)]
-        public virtual string Wallet { get; set; }
+        [Parameter("address", "account", 1)]
+        public virtual string Account { get; set; }
     }
 
     public partial class GetBattleFunction : GetBattleFunctionBase { }
@@ -199,15 +202,6 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual BigInteger Entity { get; set; }
     }
 
-    public partial class GetWalletCooldownFunction : GetWalletCooldownFunctionBase { }
-
-    [Function("getWalletCooldown", "uint32")]
-    public class GetWalletCooldownFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "wallet", 1)]
-        public virtual string Wallet { get; set; }
-    }
-
     public partial class InitializeFunction : InitializeFunctionBase { }
 
     [Function("initialize")]
@@ -250,6 +244,15 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
 
     }
 
+    public partial class RewindAccountCooldownFunction : RewindAccountCooldownFunctionBase { }
+
+    [Function("rewindAccountCooldown")]
+    public class RewindAccountCooldownFunctionBase : FunctionMessage
+    {
+        [Parameter("uint32", "rewindTime", 1)]
+        public virtual uint RewindTime { get; set; }
+    }
+
     public partial class RewindBattleTimelimitFunction : RewindBattleTimelimitFunctionBase { }
 
     [Function("rewindBattleTimelimit")]
@@ -269,15 +272,6 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         [Parameter("uint256", "shipEntity", 1)]
         public virtual BigInteger ShipEntity { get; set; }
         [Parameter("uint32", "rewindTime", 2)]
-        public virtual uint RewindTime { get; set; }
-    }
-
-    public partial class RewindWalletCooldownFunction : RewindWalletCooldownFunctionBase { }
-
-    [Function("rewindWalletCooldown")]
-    public class RewindWalletCooldownFunctionBase : FunctionMessage
-    {
-        [Parameter("uint32", "rewindTime", 1)]
         public virtual uint RewindTime { get; set; }
     }
 
@@ -410,8 +404,8 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual BigInteger DamageDealt { get; set; }
         [Parameter("uint256", "damageTaken", 8, false )]
         public virtual BigInteger DamageTaken { get; set; }
-        [Parameter("bool", "isKillShot", 9, false )]
-        public virtual bool IsKillShot { get; set; }
+        [Parameter("bool", "isFinalBlow", 9, false )]
+        public virtual bool IsFinalBlow { get; set; }
     }
 
     public partial class BattleStartedEventDTO : BattleStartedEventDTOBase { }
@@ -462,6 +456,8 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         [Parameter("address", "account", 1, false )]
         public virtual string Account { get; set; }
     }
+
+
 
     public partial class ActiveBattleInProgressError : ActiveBattleInProgressErrorBase { }
 
@@ -527,8 +523,6 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
 
 
 
-
-
     public partial class BossEntityToFinalBlowOutputDTO : BossEntityToFinalBlowOutputDTOBase { }
 
     [FunctionOutput]
@@ -536,8 +530,8 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
     {
         [Parameter("uint256", "shipEntity", 1)]
         public virtual BigInteger ShipEntity { get; set; }
-        [Parameter("address", "wallet", 2)]
-        public virtual string Wallet { get; set; }
+        [Parameter("address", "account", 2)]
+        public virtual string Account { get; set; }
     }
 
 
@@ -545,6 +539,15 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
 
 
 
+
+    public partial class GetAccountCooldownOutputDTO : GetAccountCooldownOutputDTOBase { }
+
+    [FunctionOutput]
+    public class GetAccountCooldownOutputDTOBase : IFunctionOutputDTO 
+    {
+        [Parameter("uint32", "", 1)]
+        public virtual uint ReturnValue1 { get; set; }
+    }
 
     public partial class GetActiveBattleOutputDTO : GetActiveBattleOutputDTOBase { }
 
@@ -557,10 +560,10 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual bool IsActive { get; set; }
     }
 
-    public partial class GetActiveBattleByWalletOutputDTO : GetActiveBattleByWalletOutputDTOBase { }
+    public partial class GetActiveBattleByAccountOutputDTO : GetActiveBattleByAccountOutputDTOBase { }
 
     [FunctionOutput]
-    public class GetActiveBattleByWalletOutputDTOBase : IFunctionOutputDTO 
+    public class GetActiveBattleByAccountOutputDTOBase : IFunctionOutputDTO 
     {
         [Parameter("tuple", "", 1)]
         public virtual Battle ReturnValue1 { get; set; }
@@ -631,15 +634,6 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual string TokenAddress { get; set; }
         [Parameter("uint256", "tokenId", 2)]
         public virtual BigInteger TokenId { get; set; }
-    }
-
-    public partial class GetWalletCooldownOutputDTO : GetWalletCooldownOutputDTOBase { }
-
-    [FunctionOutput]
-    public class GetWalletCooldownOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("uint32", "", 1)]
-        public virtual uint ReturnValue1 { get; set; }
     }
 
 
