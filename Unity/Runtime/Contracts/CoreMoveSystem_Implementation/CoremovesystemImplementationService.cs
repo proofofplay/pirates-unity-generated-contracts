@@ -188,6 +188,32 @@ namespace PirateNationContracts.CoreMoveSystem_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync<RenounceOwnershipFunction>(null, cancellationToken);
         }
 
+        public Task<string> SetAllMovesRequestAsync(SetAllMovesFunction setAllMovesFunction)
+        {
+             return ContractHandler.SendRequestAsync(setAllMovesFunction);
+        }
+
+        public Task<TransactionReceipt> SetAllMovesRequestAndWaitForReceiptAsync(SetAllMovesFunction setAllMovesFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setAllMovesFunction, cancellationToken);
+        }
+
+        public Task<string> SetAllMovesRequestAsync(List<BigInteger> moveIds)
+        {
+            var setAllMovesFunction = new SetAllMovesFunction();
+                setAllMovesFunction.MoveIds = moveIds;
+            
+             return ContractHandler.SendRequestAsync(setAllMovesFunction);
+        }
+
+        public Task<TransactionReceipt> SetAllMovesRequestAndWaitForReceiptAsync(List<BigInteger> moveIds, CancellationTokenSource cancellationToken = null)
+        {
+            var setAllMovesFunction = new SetAllMovesFunction();
+                setAllMovesFunction.MoveIds = moveIds;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(setAllMovesFunction, cancellationToken);
+        }
+
         public Task<string> SetGameRegistryRequestAsync(SetGameRegistryFunction setGameRegistryFunction)
         {
              return ContractHandler.SendRequestAsync(setGameRegistryFunction);

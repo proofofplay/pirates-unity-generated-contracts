@@ -383,10 +383,21 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual List<BigInteger> DefenderOverloads { get; set; }
     }
 
-    public partial class BattleResultsEventDTO : BattleResultsEventDTOBase { }
+    public partial class BattleStartedEventDTO : BattleStartedEventDTOBase { }
 
-    [Event("BattleResults")]
-    public class BattleResultsEventDTOBase : IEventDTO
+    [Event("BattleStarted")]
+    public class BattleStartedEventDTOBase : IEventDTO
+    {
+        [Parameter("uint256", "battleEntity", 1, true )]
+        public virtual BigInteger BattleEntity { get; set; }
+        [Parameter("uint256", "battleSeed", 2, false )]
+        public virtual BigInteger BattleSeed { get; set; }
+    }
+
+    public partial class BossBattleResultEventDTO : BossBattleResultEventDTOBase { }
+
+    [Event("BossBattleResult")]
+    public class BossBattleResultEventDTOBase : IEventDTO
     {
         [Parameter("address", "account", 1, true )]
         public virtual string Account { get; set; }
@@ -406,17 +417,6 @@ namespace PirateNationContracts.BossBattleSystem.ContractDefinition
         public virtual BigInteger DamageTaken { get; set; }
         [Parameter("bool", "isFinalBlow", 9, false )]
         public virtual bool IsFinalBlow { get; set; }
-    }
-
-    public partial class BattleStartedEventDTO : BattleStartedEventDTOBase { }
-
-    [Event("BattleStarted")]
-    public class BattleStartedEventDTOBase : IEventDTO
-    {
-        [Parameter("uint256", "battleEntity", 1, true )]
-        public virtual BigInteger BattleEntity { get; set; }
-        [Parameter("uint256", "battleSeed", 2, false )]
-        public virtual BigInteger BattleSeed { get; set; }
     }
 
     public partial class InitializedEventDTO : InitializedEventDTOBase { }

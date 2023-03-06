@@ -155,6 +155,15 @@ namespace PirateNationContracts.CoreMoveSystem.ContractDefinition
 
     }
 
+    public partial class SetAllMovesFunction : SetAllMovesFunctionBase { }
+
+    [Function("setAllMoves")]
+    public class SetAllMovesFunctionBase : FunctionMessage
+    {
+        [Parameter("uint256[]", "moveIds", 1)]
+        public virtual List<BigInteger> MoveIds { get; set; }
+    }
+
     public partial class SetGameRegistryFunction : SetGameRegistryFunctionBase { }
 
     [Function("setGameRegistry")]
@@ -251,6 +260,17 @@ namespace PirateNationContracts.CoreMoveSystem.ContractDefinition
 
 
 
+    public partial class InvalidMoveIdError : InvalidMoveIdErrorBase { }
+
+    [Error("InvalidMoveId")]
+    public class InvalidMoveIdErrorBase : IErrorDTO
+    {
+        [Parameter("uint256", "moveId", 1)]
+        public virtual BigInteger MoveId { get; set; }
+    }
+
+
+
     public partial class MissingRoleError : MissingRoleErrorBase { }
 
     [Error("MissingRole")]
@@ -329,6 +349,8 @@ namespace PirateNationContracts.CoreMoveSystem.ContractDefinition
         [Parameter("bool", "", 1)]
         public virtual bool ReturnValue1 { get; set; }
     }
+
+
 
 
 
