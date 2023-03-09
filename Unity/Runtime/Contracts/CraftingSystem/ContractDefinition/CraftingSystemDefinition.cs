@@ -365,23 +365,6 @@ namespace PirateNationContracts.CraftingSystem.ContractDefinition
 
 
 
-    public partial class InputLengthMismatchError : InputLengthMismatchErrorBase { }
-
-    [Error("InputLengthMismatch")]
-    public class InputLengthMismatchErrorBase : IErrorDTO
-    {
-        [Parameter("uint256", "expected", 1)]
-        public virtual BigInteger Expected { get; set; }
-        [Parameter("uint256", "actual", 2)]
-        public virtual BigInteger Actual { get; set; }
-    }
-
-
-
-
-
-
-
     public partial class InvalidTraitCheckTypeError : InvalidTraitCheckTypeErrorBase { }
 
     [Error("InvalidTraitCheckType")]
@@ -400,59 +383,6 @@ namespace PirateNationContracts.CraftingSystem.ContractDefinition
         public virtual string Account { get; set; }
         [Parameter("bytes32", "expectedRole", 2)]
         public virtual byte[] ExpectedRole { get; set; }
-    }
-
-    public partial class RecipeNotAvailableError : RecipeNotAvailableErrorBase { }
-
-    [Error("RecipeNotAvailable")]
-    public class RecipeNotAvailableErrorBase : IErrorDTO
-    {
-        [Parameter("address", "account", 1)]
-        public virtual string Account { get; set; }
-        [Parameter("uint32", "recipeId", 2)]
-        public virtual uint RecipeId { get; set; }
-    }
-
-    public partial class RecipeNotDefinedError : RecipeNotDefinedErrorBase { }
-
-    [Error("RecipeNotDefined")]
-    public class RecipeNotDefinedErrorBase : IErrorDTO
-    {
-        [Parameter("uint32", "recipeId", 1)]
-        public virtual uint RecipeId { get; set; }
-    }
-
-    public partial class TokenContractNotMatchingError : TokenContractNotMatchingErrorBase { }
-
-    [Error("TokenContractNotMatching")]
-    public class TokenContractNotMatchingErrorBase : IErrorDTO
-    {
-        [Parameter("address", "expected", 1)]
-        public virtual string Expected { get; set; }
-        [Parameter("address", "actual", 2)]
-        public virtual string Actual { get; set; }
-    }
-
-    public partial class TokenIdNotMatchingError : TokenIdNotMatchingErrorBase { }
-
-    [Error("TokenIdNotMatching")]
-    public class TokenIdNotMatchingErrorBase : IErrorDTO
-    {
-        [Parameter("uint256", "expected", 1)]
-        public virtual BigInteger Expected { get; set; }
-        [Parameter("uint256", "actual", 2)]
-        public virtual BigInteger Actual { get; set; }
-    }
-
-    public partial class TokenTypeNotMatchingError : TokenTypeNotMatchingErrorBase { }
-
-    [Error("TokenTypeNotMatching")]
-    public class TokenTypeNotMatchingErrorBase : IErrorDTO
-    {
-        [Parameter("uint8", "expected", 1)]
-        public virtual byte Expected { get; set; }
-        [Parameter("uint8", "actual", 2)]
-        public virtual byte Actual { get; set; }
     }
 
     public partial class TraitCheckFailedError : TraitCheckFailedErrorBase { }

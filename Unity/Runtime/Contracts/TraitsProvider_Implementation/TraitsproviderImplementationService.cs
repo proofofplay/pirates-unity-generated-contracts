@@ -331,22 +331,6 @@ namespace PirateNationContracts.TraitsProvider_Implementation
             return ContractHandler.QueryAsync<GetTraitInt256Function, BigInteger>(getTraitInt256Function, blockParameter);
         }
 
-        public Task<List<BigInteger>> GetTraitInt256ArrayQueryAsync(GetTraitInt256ArrayFunction getTraitInt256ArrayFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<GetTraitInt256ArrayFunction, List<BigInteger>>(getTraitInt256ArrayFunction, blockParameter);
-        }
-
-        
-        public Task<List<BigInteger>> GetTraitInt256ArrayQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
-        {
-            var getTraitInt256ArrayFunction = new GetTraitInt256ArrayFunction();
-                getTraitInt256ArrayFunction.TokenContract = tokenContract;
-                getTraitInt256ArrayFunction.TokenId = tokenId;
-                getTraitInt256ArrayFunction.TraitId = traitId;
-            
-            return ContractHandler.QueryAsync<GetTraitInt256ArrayFunction, List<BigInteger>>(getTraitInt256ArrayFunction, blockParameter);
-        }
-
         public Task<GetTraitMetadataOutputDTO> GetTraitMetadataQueryAsync(GetTraitMetadataFunction getTraitMetadataFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryDeserializingToObjectAsync<GetTraitMetadataFunction, GetTraitMetadataOutputDTO>(getTraitMetadataFunction, blockParameter);
@@ -390,22 +374,6 @@ namespace PirateNationContracts.TraitsProvider_Implementation
                 getTraitUint256Function.TraitId = traitId;
             
             return ContractHandler.QueryAsync<GetTraitUint256Function, BigInteger>(getTraitUint256Function, blockParameter);
-        }
-
-        public Task<List<BigInteger>> GetTraitUint256ArrayQueryAsync(GetTraitUint256ArrayFunction getTraitUint256ArrayFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<GetTraitUint256ArrayFunction, List<BigInteger>>(getTraitUint256ArrayFunction, blockParameter);
-        }
-
-        
-        public Task<List<BigInteger>> GetTraitUint256ArrayQueryAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, BlockParameter blockParameter = null)
-        {
-            var getTraitUint256ArrayFunction = new GetTraitUint256ArrayFunction();
-                getTraitUint256ArrayFunction.TokenContract = tokenContract;
-                getTraitUint256ArrayFunction.TokenId = tokenId;
-                getTraitUint256ArrayFunction.TraitId = traitId;
-            
-            return ContractHandler.QueryAsync<GetTraitUint256ArrayFunction, List<BigInteger>>(getTraitUint256ArrayFunction, blockParameter);
         }
 
         public Task<bool> HasTraitQueryAsync(HasTraitFunction hasTraitFunction, BlockParameter blockParameter = null)
@@ -654,38 +622,6 @@ namespace PirateNationContracts.TraitsProvider_Implementation
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitInt256Function, cancellationToken);
         }
 
-        public Task<string> SetTraitInt256ArrayRequestAsync(SetTraitInt256ArrayFunction setTraitInt256ArrayFunction)
-        {
-             return ContractHandler.SendRequestAsync(setTraitInt256ArrayFunction);
-        }
-
-        public Task<TransactionReceipt> SetTraitInt256ArrayRequestAndWaitForReceiptAsync(SetTraitInt256ArrayFunction setTraitInt256ArrayFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitInt256ArrayFunction, cancellationToken);
-        }
-
-        public Task<string> SetTraitInt256ArrayRequestAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, List<BigInteger> value)
-        {
-            var setTraitInt256ArrayFunction = new SetTraitInt256ArrayFunction();
-                setTraitInt256ArrayFunction.TokenContract = tokenContract;
-                setTraitInt256ArrayFunction.TokenId = tokenId;
-                setTraitInt256ArrayFunction.TraitId = traitId;
-                setTraitInt256ArrayFunction.Value = value;
-            
-             return ContractHandler.SendRequestAsync(setTraitInt256ArrayFunction);
-        }
-
-        public Task<TransactionReceipt> SetTraitInt256ArrayRequestAndWaitForReceiptAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, List<BigInteger> value, CancellationTokenSource cancellationToken = null)
-        {
-            var setTraitInt256ArrayFunction = new SetTraitInt256ArrayFunction();
-                setTraitInt256ArrayFunction.TokenContract = tokenContract;
-                setTraitInt256ArrayFunction.TokenId = tokenId;
-                setTraitInt256ArrayFunction.TraitId = traitId;
-                setTraitInt256ArrayFunction.Value = value;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitInt256ArrayFunction, cancellationToken);
-        }
-
         public Task<string> SetTraitMetadataRequestAsync(SetTraitMetadataFunction setTraitMetadataFunction)
         {
              return ContractHandler.SendRequestAsync(setTraitMetadataFunction);
@@ -776,38 +712,6 @@ namespace PirateNationContracts.TraitsProvider_Implementation
                 setTraitUint256Function.Value = value;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitUint256Function, cancellationToken);
-        }
-
-        public Task<string> SetTraitUint256ArrayRequestAsync(SetTraitUint256ArrayFunction setTraitUint256ArrayFunction)
-        {
-             return ContractHandler.SendRequestAsync(setTraitUint256ArrayFunction);
-        }
-
-        public Task<TransactionReceipt> SetTraitUint256ArrayRequestAndWaitForReceiptAsync(SetTraitUint256ArrayFunction setTraitUint256ArrayFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitUint256ArrayFunction, cancellationToken);
-        }
-
-        public Task<string> SetTraitUint256ArrayRequestAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, List<BigInteger> value)
-        {
-            var setTraitUint256ArrayFunction = new SetTraitUint256ArrayFunction();
-                setTraitUint256ArrayFunction.TokenContract = tokenContract;
-                setTraitUint256ArrayFunction.TokenId = tokenId;
-                setTraitUint256ArrayFunction.TraitId = traitId;
-                setTraitUint256ArrayFunction.Value = value;
-            
-             return ContractHandler.SendRequestAsync(setTraitUint256ArrayFunction);
-        }
-
-        public Task<TransactionReceipt> SetTraitUint256ArrayRequestAndWaitForReceiptAsync(string tokenContract, BigInteger tokenId, BigInteger traitId, List<BigInteger> value, CancellationTokenSource cancellationToken = null)
-        {
-            var setTraitUint256ArrayFunction = new SetTraitUint256ArrayFunction();
-                setTraitUint256ArrayFunction.TokenContract = tokenContract;
-                setTraitUint256ArrayFunction.TokenId = tokenId;
-                setTraitUint256ArrayFunction.TraitId = traitId;
-                setTraitUint256ArrayFunction.Value = value;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(setTraitUint256ArrayFunction, cancellationToken);
         }
 
         public Task<bool> SupportsInterfaceQueryAsync(SupportsInterfaceFunction supportsInterfaceFunction, BlockParameter blockParameter = null)

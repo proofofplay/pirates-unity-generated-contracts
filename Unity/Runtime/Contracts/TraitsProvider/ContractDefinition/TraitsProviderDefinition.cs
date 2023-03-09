@@ -242,19 +242,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
         public virtual BigInteger TraitId { get; set; }
     }
 
-    public partial class GetTraitInt256ArrayFunction : GetTraitInt256ArrayFunctionBase { }
-
-    [Function("getTraitInt256Array", "int256[]")]
-    public class GetTraitInt256ArrayFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint256", "traitId", 3)]
-        public virtual BigInteger TraitId { get; set; }
-    }
-
     public partial class GetTraitMetadataFunction : GetTraitMetadataFunctionBase { }
 
     [Function("getTraitMetadata", typeof(GetTraitMetadataOutputDTO))]
@@ -281,19 +268,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
 
     [Function("getTraitUint256", "uint256")]
     public class GetTraitUint256FunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint256", "traitId", 3)]
-        public virtual BigInteger TraitId { get; set; }
-    }
-
-    public partial class GetTraitUint256ArrayFunction : GetTraitUint256ArrayFunctionBase { }
-
-    [Function("getTraitUint256Array", "uint256[]")]
-    public class GetTraitUint256ArrayFunctionBase : FunctionMessage
     {
         [Parameter("address", "tokenContract", 1)]
         public virtual string TokenContract { get; set; }
@@ -421,21 +395,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
         public virtual BigInteger Value { get; set; }
     }
 
-    public partial class SetTraitInt256ArrayFunction : SetTraitInt256ArrayFunctionBase { }
-
-    [Function("setTraitInt256Array")]
-    public class SetTraitInt256ArrayFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint256", "traitId", 3)]
-        public virtual BigInteger TraitId { get; set; }
-        [Parameter("int256[]", "value", 4)]
-        public virtual List<BigInteger> Value { get; set; }
-    }
-
     public partial class SetTraitMetadataFunction : SetTraitMetadataFunctionBase { }
 
     [Function("setTraitMetadata")]
@@ -475,21 +434,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
         public virtual BigInteger TraitId { get; set; }
         [Parameter("uint256", "value", 4)]
         public virtual BigInteger Value { get; set; }
-    }
-
-    public partial class SetTraitUint256ArrayFunction : SetTraitUint256ArrayFunctionBase { }
-
-    [Function("setTraitUint256Array")]
-    public class SetTraitUint256ArrayFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "tokenContract", 1)]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2)]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint256", "traitId", 3)]
-        public virtual BigInteger TraitId { get; set; }
-        [Parameter("uint256[]", "value", 4)]
-        public virtual List<BigInteger> Value { get; set; }
     }
 
     public partial class SupportsInterfaceFunction : SupportsInterfaceFunctionBase { }
@@ -575,21 +519,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
     {
         [Parameter("uint256", "traitId", 1, true )]
         public virtual BigInteger TraitId { get; set; }
-    }
-
-    public partial class TraitValueSetEventDTO : TraitValueSetEventDTOBase { }
-
-    [Event("TraitValueSet")]
-    public class TraitValueSetEventDTOBase : IEventDTO
-    {
-        [Parameter("address", "tokenContract", 1, true )]
-        public virtual string TokenContract { get; set; }
-        [Parameter("uint256", "tokenId", 2, true )]
-        public virtual BigInteger TokenId { get; set; }
-        [Parameter("uint256", "traitId", 3, true )]
-        public virtual BigInteger TraitId { get; set; }
-        [Parameter("bytes", "value", 4, false )]
-        public virtual byte[] Value { get; set; }
     }
 
     public partial class TraitsUpdatedEventDTO : TraitsUpdatedEventDTOBase { }
@@ -756,15 +685,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
         public virtual BigInteger ReturnValue1 { get; set; }
     }
 
-    public partial class GetTraitInt256ArrayOutputDTO : GetTraitInt256ArrayOutputDTOBase { }
-
-    [FunctionOutput]
-    public class GetTraitInt256ArrayOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("int256[]", "", 1)]
-        public virtual List<BigInteger> ReturnValue1 { get; set; }
-    }
-
     public partial class GetTraitMetadataOutputDTO : GetTraitMetadataOutputDTOBase { }
 
     [FunctionOutput]
@@ -790,15 +710,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
     {
         [Parameter("uint256", "", 1)]
         public virtual BigInteger ReturnValue1 { get; set; }
-    }
-
-    public partial class GetTraitUint256ArrayOutputDTO : GetTraitUint256ArrayOutputDTOBase { }
-
-    [FunctionOutput]
-    public class GetTraitUint256ArrayOutputDTOBase : IFunctionOutputDTO 
-    {
-        [Parameter("uint256[]", "", 1)]
-        public virtual List<BigInteger> ReturnValue1 { get; set; }
     }
 
     public partial class HasTraitOutputDTO : HasTraitOutputDTOBase { }
@@ -840,10 +751,6 @@ namespace PirateNationContracts.TraitsProvider.ContractDefinition
         [Parameter("bool", "", 1)]
         public virtual bool ReturnValue1 { get; set; }
     }
-
-
-
-
 
 
 

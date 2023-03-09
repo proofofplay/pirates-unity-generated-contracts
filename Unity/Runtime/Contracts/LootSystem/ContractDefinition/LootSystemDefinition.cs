@@ -77,19 +77,6 @@ namespace PirateNationContracts.LootSystem.ContractDefinition
         public virtual byte[] Data { get; set; }
     }
 
-    public partial class BatchGrantLootWithoutRandomnessFunction : BatchGrantLootWithoutRandomnessFunctionBase { }
-
-    [Function("batchGrantLootWithoutRandomness")]
-    public class BatchGrantLootWithoutRandomnessFunctionBase : FunctionMessage
-    {
-        [Parameter("address", "to", 1)]
-        public virtual string To { get; set; }
-        [Parameter("tuple[]", "loots", 2)]
-        public virtual List<Loot> Loots { get; set; }
-        [Parameter("uint8", "amount", 3)]
-        public virtual byte Amount { get; set; }
-    }
-
     public partial class FulfillRandomWordsCallbackFunction : FulfillRandomWordsCallbackFunctionBase { }
 
     [Function("fulfillRandomWordsCallback")]
@@ -377,8 +364,6 @@ namespace PirateNationContracts.LootSystem.ContractDefinition
         [Parameter("uint256", "lootTableId", 1)]
         public virtual BigInteger LootTableId { get; set; }
     }
-
-
 
 
 

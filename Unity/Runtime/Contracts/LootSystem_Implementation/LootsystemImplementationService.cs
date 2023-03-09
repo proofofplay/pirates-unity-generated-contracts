@@ -42,36 +42,6 @@ namespace PirateNationContracts.LootSystem_Implementation
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);
         }
 
-        public Task<string> BatchGrantLootWithoutRandomnessRequestAsync(BatchGrantLootWithoutRandomnessFunction batchGrantLootWithoutRandomnessFunction)
-        {
-             return ContractHandler.SendRequestAsync(batchGrantLootWithoutRandomnessFunction);
-        }
-
-        public Task<TransactionReceipt> BatchGrantLootWithoutRandomnessRequestAndWaitForReceiptAsync(BatchGrantLootWithoutRandomnessFunction batchGrantLootWithoutRandomnessFunction, CancellationTokenSource cancellationToken = null)
-        {
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(batchGrantLootWithoutRandomnessFunction, cancellationToken);
-        }
-
-        public Task<string> BatchGrantLootWithoutRandomnessRequestAsync(string to, List<Loot> loots, byte amount)
-        {
-            var batchGrantLootWithoutRandomnessFunction = new BatchGrantLootWithoutRandomnessFunction();
-                batchGrantLootWithoutRandomnessFunction.To = to;
-                batchGrantLootWithoutRandomnessFunction.Loots = loots;
-                batchGrantLootWithoutRandomnessFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAsync(batchGrantLootWithoutRandomnessFunction);
-        }
-
-        public Task<TransactionReceipt> BatchGrantLootWithoutRandomnessRequestAndWaitForReceiptAsync(string to, List<Loot> loots, byte amount, CancellationTokenSource cancellationToken = null)
-        {
-            var batchGrantLootWithoutRandomnessFunction = new BatchGrantLootWithoutRandomnessFunction();
-                batchGrantLootWithoutRandomnessFunction.To = to;
-                batchGrantLootWithoutRandomnessFunction.Loots = loots;
-                batchGrantLootWithoutRandomnessFunction.Amount = amount;
-            
-             return ContractHandler.SendRequestAndWaitForReceiptAsync(batchGrantLootWithoutRandomnessFunction, cancellationToken);
-        }
-
         public Task<string> FulfillRandomWordsCallbackRequestAsync(FulfillRandomWordsCallbackFunction fulfillRandomWordsCallbackFunction)
         {
              return ContractHandler.SendRequestAsync(fulfillRandomWordsCallbackFunction);

@@ -125,20 +125,20 @@ namespace PirateNationContracts.TokenTemplateSystem_Implementation
             return ContractHandler.QueryAsync<GenerateTokenURIFunction, string>(generateTokenURIFunction, blockParameter);
         }
 
-        public Task<string> GenerateTokenURIWithExtraQueryAsync(GenerateTokenURIWithExtraFunction generateTokenURIWithExtraFunction, BlockParameter blockParameter = null)
+        public Task<string> GenerateTokenURIQueryAsync(GenerateTokenURI1Function generateTokenURI1Function, BlockParameter blockParameter = null)
         {
-            return ContractHandler.QueryAsync<GenerateTokenURIWithExtraFunction, string>(generateTokenURIWithExtraFunction, blockParameter);
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
         }
 
         
-        public Task<string> GenerateTokenURIWithExtraQueryAsync(string tokenContract, BigInteger tokenId, List<TokenURITrait> extraTraits, BlockParameter blockParameter = null)
+        public Task<string> GenerateTokenURIQueryAsync(string tokenContract, BigInteger tokenId, List<TokenURITrait> extraTraits, BlockParameter blockParameter = null)
         {
-            var generateTokenURIWithExtraFunction = new GenerateTokenURIWithExtraFunction();
-                generateTokenURIWithExtraFunction.TokenContract = tokenContract;
-                generateTokenURIWithExtraFunction.TokenId = tokenId;
-                generateTokenURIWithExtraFunction.ExtraTraits = extraTraits;
+            var generateTokenURI1Function = new GenerateTokenURI1Function();
+                generateTokenURI1Function.TokenContract = tokenContract;
+                generateTokenURI1Function.TokenId = tokenId;
+                generateTokenURI1Function.ExtraTraits = extraTraits;
             
-            return ContractHandler.QueryAsync<GenerateTokenURIWithExtraFunction, string>(generateTokenURIWithExtraFunction, blockParameter);
+            return ContractHandler.QueryAsync<GenerateTokenURI1Function, string>(generateTokenURI1Function, blockParameter);
         }
 
         public Task<string> GetGameRegistryQueryAsync(GetGameRegistryFunction getGameRegistryFunction, BlockParameter blockParameter = null)
